@@ -6,9 +6,9 @@
 /* body 기본 스타일 */
 body {
   margin: 0;
-  background-color: #f4f6f8;
+  background-color: #f4f6fb;
   font-family: Arial, "Noto Sans KR", sans-serif;
-  color: #222;
+  color: #111827;
 }
 
 /* 전체 화면을 감싸는 영역 */
@@ -19,22 +19,44 @@ body {
   padding: 40px 0;
 }
 
+/* 송금 화면 전체 정렬 */
+.transfer-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 로그인 화면과 비슷한 큰 카드 */
+.transfer-card {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #dfe3ec;
+  border-radius: 28px;
+  padding: 52px 58px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.04);
+}
+
 /* 화면 상단 제목 */
 .page-header {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 /* 큰 제목 */
 .page-header h1 {
-  margin: 0 0 8px;
-  font-size: 28px;
+  margin: 0 0 12px;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #0f172a;
 }
 
 /* 설명 문구 */
 .page-header p {
   margin: 0;
-  color: #666;
-  line-height: 1.5;
+  color: #7b8498;
+  font-size: 17px;
+  line-height: 1.6;
 }
 
 /* 공통 카드 스타일 */
@@ -76,7 +98,7 @@ body {
 .balance-box h2 {
   margin: 0;
   font-size: 34px;
-  color: #2563eb;
+  color: #8279dc;
 }
 
 /* 출금 가능 금액 영역 */
@@ -95,69 +117,187 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f9fafb;
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 20px;
+  background-color: #fafbff;
+  padding: 18px 20px;
+  border-radius: 10px;
+  margin-bottom: 28px;
 }
 
 /* 출금 가능 금액 라벨 */
 .available-info span {
-  color: #666;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+/* 출금 가능 금액 숫자 */
+.available-info strong {
+  font-size: 16px;
+  color: #111827;
 }
 
 /* 입력 영역 */
 .input-group {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 /* 입력 라벨 */
 .input-group label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
+  margin-bottom: 12px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
 }
 
 /* 입력창 */
 .input-group input {
   width: 100%;
-  height: 48px;
-  padding: 0 14px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  font-size: 16px;
+  height: 56px;
+  padding: 0 18px;
+  border: 1px solid #cfd4df;
+  border-radius: 9px;
+  font-size: 17px;
+  color: #111827;
+  background-color: #ffffff;
+}
+
+/* placeholder 색상 */
+.input-group input::placeholder {
+  color: #a5adbd;
 }
 
 /* 입력창 클릭 시 */
 .input-group input:focus {
   outline: none;
-  border-color: #2563eb;
+  border-color: #8279dc;
+  box-shadow: 0 0 0 3px rgba(130, 121, 220, 0.12);
 }
 
 /* 안내 메시지 */
 .message {
-  margin: 0 0 16px;
-  padding: 12px;
-  border-radius: 12px;
-  background-color: #eff6ff;
-  color: #1d4ed8;
-  font-size: 14px;
+  margin: 0 0 22px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background-color: #f3f5ff;
+  color: #6f66d9;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 /* 송금 요청 버튼 */
 .primary-button {
   width: 100%;
-  height: 50px;
-  border: none;
-  border-radius: 12px;
-  background-color: #2563eb;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
+  height: 58px;
+  border: 1px solid #cfd4df;
+  border-radius: 9px;
+  background-color: #ffffff;
+  color: #111827;
+  font-size: 17px;
+  font-weight: 700;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 /* 버튼에 마우스를 올렸을 때 */
 .primary-button:hover {
-  background-color: #1d4ed8;
+  background-color: #8279dc;
+  border-color: #8279dc;
+  color: #ffffff;
+}
+
+/* 하단 보안 문구 */
+.security-text {
+  margin: 26px 0 0;
+  text-align: center;
+  color: #9aa3b5;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+  .transfer-card {
+    padding: 40px 28px;
+    border-radius: 24px;
+  }
+
+  .page-header h1 {
+    font-size: 28px;
+  }
+
+  .page-header p {
+    font-size: 15px;
+  }
+}
+
+/* 잔액 조회 화면 전체 정렬 */
+.balance-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* 로그인 화면과 비슷한 큰 카드 */
+.balance-card {
+  width: 100%;
+  max-width: 660px;
+  background-color: #ffffff;
+  border: 1px solid #dfe3ec;
+  border-radius: 28px;
+  padding: 52px 58px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.04);
+}
+
+/* 잔액 조회 안쪽 카드 */
+.balance-inner-card {
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: none;
+}
+
+/* 잔액 조회 제목 간격 */
+.balance-card .page-header {
+  margin-bottom: 32px;
+}
+
+/* 라벨 색상 로그인 화면 톤에 맞춤 */
+.balance-card .label {
+  color: #7b8498;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* 계좌번호 텍스트 */
+.balance-card .account-number {
+  font-size: 19px;
+  font-weight: 800;
+  color: #111827;
+}
+
+/* 현재 잔액 금액 */
+.balance-card .balance-box h2 {
+  font-size: 38px;
+  color: #8279dc;
+  letter-spacing: -1px;
+}
+
+/* 출금 가능 금액 */
+.balance-card .available-box h3 {
+  font-size: 24px;
+  color: #111827;
+  font-weight: 800;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+  .balance-card {
+    padding: 40px 28px;
+    border-radius: 24px;
+  }
+
+  .balance-inner-card {
+    padding: 24px;
+  }
 }
