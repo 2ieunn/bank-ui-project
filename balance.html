@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>잔액 조회</title>
+
+    <!-- 공통 CSS 연결 -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- 전체 화면 영역 -->
+    <div class="container">
+      <!-- 화면 제목 -->
+      <header class="page-header">
+        <h1>잔액 조회</h1>
+        <p>내 계좌의 현재 잔액과 출금 가능한 금액을 확인할 수 있습니다.</p>
+      </header>
+
+      <!-- 잔액 표시 카드 -->
+      <section class="card">
+        <!-- 계좌 정보 영역 -->
+        <div class="account-info">
+          <p class="label">계좌 번호</p>
+          <p class="account-number">110-123-456789</p>
+        </div>
+
+        <!-- 현재 잔액 표시 영역 -->
+        <div class="balance-box">
+          <p class="label">현재 잔액</p>
+          <h2>10,000원</h2>
+        </div>
+
+        <!-- 출금 가능 금액 표시 영역 -->
+        <div class="available-box">
+          <p class="label">출금 가능 금액</p>
+          <h3>10,000원</h3>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

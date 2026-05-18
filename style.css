@@ -1,0 +1,163 @@
+/* 전체 기본 설정 */
+* {
+  box-sizing: border-box;
+}
+
+/* body 기본 스타일 */
+body {
+  margin: 0;
+  background-color: #f4f6f8;
+  font-family: Arial, "Noto Sans KR", sans-serif;
+  color: #222;
+}
+
+/* 전체 화면을 감싸는 영역 */
+.container {
+  width: 90%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* 화면 상단 제목 */
+.page-header {
+  margin-bottom: 24px;
+}
+
+/* 큰 제목 */
+.page-header h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+/* 설명 문구 */
+.page-header p {
+  margin: 0;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* 공통 카드 스타일 */
+.card {
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* 작은 라벨 텍스트 */
+.label {
+  margin: 0 0 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+/* 계좌번호 영역 */
+.account-info {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* 계좌번호 텍스트 */
+.account-number {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 현재 잔액 영역 */
+.balance-box {
+  padding: 24px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* 현재 잔액 금액 */
+.balance-box h2 {
+  margin: 0;
+  font-size: 34px;
+  color: #2563eb;
+}
+
+/* 출금 가능 금액 영역 */
+.available-box {
+  padding-top: 20px;
+}
+
+/* 출금 가능 금액 */
+.available-box h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+/* 송금 화면의 출금 가능 금액 안내 */
+.available-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9fafb;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* 출금 가능 금액 라벨 */
+.available-info span {
+  color: #666;
+}
+
+/* 입력 영역 */
+.input-group {
+  margin-bottom: 16px;
+}
+
+/* 입력 라벨 */
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* 입력창 */
+.input-group input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+/* 입력창 클릭 시 */
+.input-group input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* 안내 메시지 */
+.message {
+  margin: 0 0 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-size: 14px;
+}
+
+/* 송금 요청 버튼 */
+.primary-button {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 12px;
+  background-color: #2563eb;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* 버튼에 마우스를 올렸을 때 */
+.primary-button:hover {
+  background-color: #1d4ed8;
+}

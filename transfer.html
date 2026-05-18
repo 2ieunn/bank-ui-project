@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>송금 요청</title>
+
+    <!-- 공통 CSS 연결 -->
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- 전체 화면 영역 -->
+    <div class="container">
+      <!-- 화면 제목 -->
+      <header class="page-header">
+        <h1>송금 요청</h1>
+        <p>송금할 금액을 입력한 뒤 송금 요청 버튼을 눌러주세요.</p>
+      </header>
+
+      <!-- 송금 요청 카드 -->
+      <section class="card">
+        <!-- 출금 가능 금액 안내 -->
+        <div class="available-info">
+          <span>출금 가능 금액</span>
+          <strong>10,000원</strong>
+        </div>
+
+        <!-- 송금 금액 입력 영역 -->
+        <div class="input-group">
+          <label for="amount">송금 금액</label>
+          <input
+            type="number"
+            id="amount"
+            placeholder="송금할 금액을 입력하세요"
+          />
+        </div>
+
+        <!-- 안내 메시지 영역 -->
+        <p class="message">출금 가능 금액 이하로 입력해주세요.</p>
+
+        <!-- 송금 요청 버튼 -->
+        <button class="primary-button">송금 요청</button>
+      </section>
+    </div>
+  </body>
+</html>
