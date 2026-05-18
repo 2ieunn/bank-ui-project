@@ -1,183 +1,185 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>자산 현황</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <main class="dashboard-page">
-    <aside class="sidebar">
-      <div>
-        <div class="logo-area">
-          <div class="logo-icon">▤</div>
-          <span>송금시스템</span>
-        </div>
-
-        <div class="profile-box">
-          <div class="profile-circle">김</div>
-          <div>
-            <strong>김민영 님</strong>
-            <p>일반 회원</p>
-          </div>
-        </div>
-
-        <nav class="menu-section">
-          <p class="menu-title">메뉴</p>
-
-          <a href="#" class="menu-item active">
-            <span>⌂</span>
-            <p>자산 현황</p>
-          </a>
-
-          <a href="#" class="menu-item">
-            <span>⇄</span>
-            <p>이체</p>
-          </a>
-
-          <a href="#" class="menu-item">
-            <span>⌁</span>
-            <p>거래 내역</p>
-          </a>
-
-          <a href="#" class="menu-item">
-            <span>▣</span>
-            <p>계좌 관리</p>
-          </a>
-        </nav>
-
-        <nav class="menu-section setting-section">
-          <p class="menu-title">설정</p>
-
-          <a href="#" class="menu-item">
-            <span>▣</span>
-            <p>보안 설정</p>
-          </a>
-
-          <a href="#" class="menu-item">
-            <span>◉</span>
-            <p>고객 지원</p>
-          </a>
-        </nav>
-      </div>
-
-      <button class="logout-button" type="button" onclick="location.href='./index.html'">
-        <span>↪</span>
-        로그아웃
-      </button>
-    </aside>
-
-    <section class="dashboard-content">
-      <header class="dashboard-header">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자산 현황</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="dashboard-page">
+      <aside class="sidebar">
         <div>
-          <h1>안녕하세요, 김민영님</h1>
-          <p>내 자산을 안전하게 관리하고 있어요. · 오늘 기준 잔액</p>
-        </div>
-
-        <div class="header-buttons">
-          <button type="button">↻</button>
-          <button type="button">♧</button>
-        </div>
-      </header>
-
-      <section class="summary-grid">
-        <article class="summary-card main-balance">
-          <p>총 자산</p>
-          <strong>10,000원</strong>
-          <span>⟳ 보안 연결됨</span>
-        </article>
-
-        <article class="summary-card">
-          <p>이번 달 수입</p>
-          <strong>0원</strong>
-          <span>내역 없음</span>
-        </article>
-
-        <article class="summary-card">
-          <p>이번 달 지출</p>
-          <strong>0원</strong>
-          <span>내역 없음</span>
-        </article>
-      </section>
-
-      <section class="main-grid">
-        <article class="panel account-panel">
-          <div class="panel-title-row">
-            <h2>연결된 계좌</h2>
-            <a href="#">전체 보기</a>
+          <div class="logo-area">
+            <div class="logo-icon">▤</div>
+            <span>송금시스템</span>
           </div>
 
-          <div class="account-box">
-            <div class="account-icon">▣</div>
+          <div class="profile-box">
+            <div class="profile-circle">김</div>
+            <div>
+              <strong>김민영 님</strong>
+              <p>일반 회원</p>
+            </div>
+          </div>
 
-            <div class="account-info">
-              <p>주 계좌</p>
-              <span>100-1234-5678</span>
+          <nav class="menu-section">
+            <p class="menu-title">메뉴</p>
+
+            <a href="#" class="menu-item active">
+              <span>⌂</span>
+              <p>자산 현황</p>
+            </a>
+
+            <a href="./transfer.html" class="menu-item">
+              <span>⇄</span>
+              <p>이체</p>
+            </a>
+
+            <a href="#" class="menu-item">
+              <span>⌁</span>
+              <p>거래 내역</p>
+            </a>
+
+            <a href="#" class="menu-item">
+              <span>▣</span>
+              <p>계좌 관리</p>
+            </a>
+          </nav>
+
+          <nav class="menu-section setting-section">
+            <p class="menu-title">설정</p>
+
+            <a href="#" class="menu-item">
+              <span>▣</span>
+              <p>보안 설정</p>
+            </a>
+
+            <a href="#" class="menu-item">
+              <span>◉</span>
+              <p>고객 지원</p>
+            </a>
+          </nav>
+        </div>
+
+        <button
+          class="logout-button"
+          type="button"
+          onclick="location.href = './index.html'"
+        >
+          <span>↪</span>
+          로그아웃
+        </button>
+      </aside>
+
+      <section class="dashboard-content">
+        <header class="dashboard-header">
+          <div>
+            <h1>안녕하세요, 김민영님</h1>
+            <p>내 자산을 안전하게 관리하고 있어요. · 오늘 기준 잔액</p>
+          </div>
+
+          <div class="header-buttons">
+            <button type="button">↻</button>
+            <button type="button">♧</button>
+          </div>
+        </header>
+
+        <section class="summary-grid">
+          <article class="summary-card main-balance">
+            <p>총 자산</p>
+            <strong>10,000원</strong>
+            <span>⟳ 보안 연결됨</span>
+          </article>
+
+          <article class="summary-card">
+            <p>이번 달 수입</p>
+            <strong>0원</strong>
+            <span>내역 없음</span>
+          </article>
+
+          <article class="summary-card">
+            <p>이번 달 지출</p>
+            <strong>0원</strong>
+            <span>내역 없음</span>
+          </article>
+        </section>
+
+        <section class="main-grid">
+          <article class="panel account-panel">
+            <div class="panel-title-row">
+              <h2>연결된 계좌</h2>
+              <a href="#">전체 보기</a>
             </div>
 
-            <strong>10,000원</strong>
-          </div>
+            <div class="account-box">
+              <div class="account-icon">▣</div>
 
-        
+              <div class="account-info">
+                <p>주 계좌</p>
+                <span>100-1234-5678</span>
+              </div>
 
-          <div class="account-divider"></div>
+              <strong>10,000원</strong>
+            </div>
 
-          <div class="add-account">
-            <div>＋</div>
-            <section>
-              <p>계좌 추가</p>
-              <span>새 계좌를 연결하세요</span>
-            </section>
-          </div>
+            <div class="account-divider"></div>
 
-          <button class="down-button" type="button">↓</button>
-        </article>
-
-        <article class="panel quick-panel">
-          <h2>빠른 메뉴</h2>
-
-          <div class="quick-grid">
-            <button type="button">
-              <span>⇄</span>
+            <div class="add-account">
+              <div>＋</div>
               <section>
-                <strong>이체</strong>
-                <p>계좌 간 자금 이동</p>
+                <p>계좌 추가</p>
+                <span>새 계좌를 연결하세요</span>
               </section>
-            </button>
+            </div>
 
-            <button type="button">
-              <span>▥</span>
-              <section>
-                <strong>거래 내역</strong>
-                <p>수입·지출 확인</p>
-              </section>
-            </button>
+            <button class="down-button" type="button">↓</button>
+          </article>
 
-            <button type="button">
-              <span>▣</span>
-              <section>
-                <strong>보안 설정</strong>
-                <p>인증 관리</p>
-              </section>
-            </button>
+          <article class="panel quick-panel">
+            <h2>빠른 메뉴</h2>
 
-            <button type="button">
-              <span>◉</span>
-              <section>
-                <strong>고객 지원</strong>
-                <p>문의하기</p>
-              </section>
-            </button>
-          </div>
-        </article>
+            <div class="quick-grid">
+              <button type="button" onclick="location.href = './transfer.html'">
+                <span>⇄</span>
+                <section>
+                  <strong>이체</strong>
+                  <p>계좌 간 자금 이동</p>
+                </section>
+              </button>
+
+              <button type="button">
+                <span>▥</span>
+                <section>
+                  <strong>거래 내역</strong>
+                  <p>수입·지출 확인</p>
+                </section>
+              </button>
+
+              <button type="button">
+                <span>▣</span>
+                <section>
+                  <strong>보안 설정</strong>
+                  <p>인증 관리</p>
+                </section>
+              </button>
+
+              <button type="button">
+                <span>◉</span>
+                <section>
+                  <strong>고객 지원</strong>
+                  <p>문의하기</p>
+                </section>
+              </button>
+            </div>
+          </article>
+        </section>
+
+        <div class="notice-box">
+          <span></span>
+          <p></p>
+        </div>
       </section>
-
-      <div class="notice-box">
-        <span></span>
-        <p></p>
-      </div>
-    </section>
-  </main>
-</body>
+    </main>
+  </body>
 </html>

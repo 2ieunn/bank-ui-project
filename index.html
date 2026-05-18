@@ -1,64 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>로그인</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <main class="page">
-    <section class="login-card">
-      <div class="login-header">
-        <h1>안전하게 로그인하세요.</h1>
-        <p>등록하신 아이디와 비밀번호를 입력해 주세요.</p>
-      </div>
-
-      <form class="login-form" action="./account.html" method="get">
-        <div class="form-group">
-          <label for="userId">아이디</label>
-          <input
-            type="text"
-            id="userId"
-            placeholder="아이디를 입력해 주세요"
-          />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="login-card">
+        <div class="login-header">
+          <h1>안전하게 로그인하세요.</h1>
+          <p>등록하신 아이디와 비밀번호를 입력해 주세요.</p>
         </div>
 
-        <div class="form-group">
-          <label for="password">비밀번호</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="비밀번호를 입력해 주세요"
-          />
-        </div>
+        <form class="login-form" action="./account.html" method="get">
+          <div class="form-group">
+            <label for="userId">아이디</label>
+            <input
+              type="text"
+              id="userId"
+              placeholder="아이디를 입력해 주세요"
+            />
+          </div>
 
-        <div class="option-row">
-          <label class="save-id">
-            <input type="checkbox" checked />
-            <span>아이디 저장</span>
-          </label>
+          <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="비밀번호를 입력해 주세요"
+            />
+          </div>
 
-          <a href="#" class="find-password">비밀번호를 잊으셨나요?</a>
-        </div>
+          <div class="option-row">
+            <label class="save-id">
+              <input type="checkbox" checked />
+              <span>아이디 저장</span>
+            </label>
 
-        <button type="submit" class="login-button">로그인</button>
+            <a href="#" class="find-password">비밀번호를 잊으셨나요?</a>
+          </div>
 
-        <div class="security-text">
-          <span></span>
-          <span></span>
-        </div>
+          <button type="submit" class="login-button">로그인</button>
 
-        <div class="divider"></div>
+          <div class="security-text">
+            <span></span>
+            <span></span>
+          </div>
 
-        <div class="bottom-links">
-          <a href="#">아이디 찾기</a>
-          <span></span>
-          <p>아직 회원이 아니신가요?</p>
-          <a href="#" class="join-link">회원가입</a>
-        </div>
-      </form>
-    </section>
-  </main>
-</body>
+          <div class="divider"></div>
+
+          <div class="bottom-links">
+            <a href="#">아이디 찾기</a>
+            <span></span>
+            <p>아직 회원이 아니신가요?</p>
+            <a href="#" class="join-link">회원가입</a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
 </html>

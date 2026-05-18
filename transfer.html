@@ -4,35 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>송금 요청</title>
-
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container transfer-container">
-      <section class="transfer-card">
-        <header class="page-header">
+    <div class="transfer-page">
+      <div class="transfer-container">
+        <div class="transfer-header">
           <h1>송금 요청</h1>
           <p>송금할 금액을 입력한 뒤 송금 요청 버튼을 눌러주세요.</p>
-        </header>
-
-        <div class="available-info">
-          <span>출금 가능 금액</span>
-          <strong>10,000원</strong>
         </div>
 
-        <div class="input-group">
-          <label for="amount">송금 금액</label>
-          <input
-            type="number"
-            id="amount"
-            placeholder="송금할 금액을 입력하세요"
-          />
+        <div class="transfer-card">
+          <div class="transfer-balance-box">
+            <span>출금 가능 금액</span>
+            <strong>10,000원</strong>
+          </div>
+
+          <form class="transfer-form">
+            <label for="amount">송금 금액</label>
+
+            <input
+              type="text"
+              id="amount"
+              placeholder="송금할 금액을 입력하세요"
+            />
+
+            <p class="transfer-info-text">
+              출금 가능 금액 이하로 입력해주세요.
+            </p>
+
+            <button
+              type="button"
+              class="transfer-submit-btn"
+              onclick="location.href = './balance.html'"
+            >
+              송금 요청
+            </button>
+          </form>
         </div>
-
-        <p class="message">출금 가능 금액 이하로 입력해주세요.</p>
-
-        <button class="primary-button">송금 요청</button>
-      </section>
+      </div>
     </div>
   </body>
 </html>
