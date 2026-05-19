@@ -1145,3 +1145,275 @@ button {
     padding: 26px 18px;
   }
 }
+.content-area {
+  flex: 1;
+  padding: 40px 48px;
+  background: #fbfcff;
+  min-height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 52px;
+  height: 52px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.history-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.summary-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.summary-card p {
+  color: #6b7280;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.summary-card strong {
+  font-size: 30px;
+  color: #111827;
+}
+
+.history-box {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.history-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.history-top h2 {
+  font-size: 22px;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.history-top p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.filter-area {
+  display: grid;
+  grid-template-columns: 180px 160px 1fr 110px;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.filter-area input,
+.filter-area select {
+  height: 46px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+}
+
+.filter-area input:focus,
+.filter-area select:focus {
+  border-color: #5367aa;
+}
+
+.filter-area button {
+  height: 46px;
+  border: none;
+  border-radius: 10px;
+  background: #5367aa;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.history-table thead {
+  background: #f3f6fb;
+}
+
+.history-table th {
+  padding: 16px;
+  color: #374151;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.history-table td {
+  padding: 18px 16px;
+  border-bottom: 1px solid #eef0f4;
+  color: #374151;
+}
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  height: 28px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.type-badge.deposit {
+  background: #e8f5ee;
+  color: #15803d;
+}
+
+.type-badge.withdraw {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.type-badge.transfer {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.plus {
+  color: #15803d !important;
+  font-weight: 700;
+}
+
+.minus {
+  color: #dc2626 !important;
+  font-weight: 700;
+}
+
+.empty-message {
+  display: none;
+  padding: 30px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 15px;
+}
+
+.menu-item {
+  text-decoration: none;
+  color: inherit;
+}
+/* 사이드바 메뉴 글자 겹침 수정 */
+.sidebar {
+  width: 340px;
+  min-width: 340px;
+  flex-shrink: 0;
+}
+
+.menu-section {
+  width: 100%;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  width: 100%;
+  height: 54px;
+
+  padding: 0 52px;
+  box-sizing: border-box;
+
+  text-decoration: none;
+  color: #1f2937;
+
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.menu-item span {
+  white-space: nowrap;
+}
+
+.menu-icon {
+  width: 22px;
+  min-width: 22px;
+  text-align: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  color: #5367aa;
+}
+
+.menu-item.active {
+  background: #eef2f8;
+  color: #5367aa;
+  border-left: 3px solid #5367aa;
+}
+.error-message {
+  min-height: 18px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+.input-error {
+  border-color: #dc2626 !important;
+  background-color: #fff7f7;
+}
+.error-message {
+  min-height: 18px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+.input-error {
+  border-color: #dc2626 !important;
+  background-color: #fff7f7;
+}

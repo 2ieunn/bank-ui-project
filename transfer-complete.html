@@ -16,7 +16,6 @@
         </div>
 
         <div class="transfer-card">
-          <!-- 송금 완료 메시지 영역 -->
           <div class="complete-message-box">
             <div class="complete-icon">✓</div>
 
@@ -24,45 +23,43 @@
             <p>요청하신 금액이 받는 사람 계좌로 정상 송금되었습니다.</p>
           </div>
 
-          <!-- 송금 완료 상세 정보 영역 -->
           <div class="complete-info-list">
             <div class="complete-info-row">
               <span>송금 금액</span>
-              <strong class="complete-amount">5,000원</strong>
+              <strong class="complete-amount" id="completeAmount">-</strong>
             </div>
 
             <div class="complete-info-row">
               <span>받는 사람</span>
-              <strong>이지은</strong>
+              <strong id="completeReceiver">-</strong>
             </div>
 
             <div class="complete-info-row">
               <span>받는 계좌</span>
-              <strong>333-456-789000</strong>
+              <strong id="completeDepositAccount">-</strong>
             </div>
 
             <div class="complete-info-row">
               <span>거래 일시</span>
-              <strong>2026.05.19 14:30</strong>
+              <strong id="completeDateTime">-</strong>
             </div>
 
             <div class="complete-info-row">
               <span>거래번호</span>
-              <strong>TR-20260519-001</strong>
+              <strong id="completeTransferNumber">-</strong>
             </div>
 
             <div class="complete-info-row">
               <span>잔액</span>
-              <strong>5,000원</strong>
+              <strong id="completeAfterBalance">-</strong>
             </div>
           </div>
 
-          <!-- 버튼 영역 -->
           <div class="complete-button-group">
             <button
               type="button"
               class="complete-sub-btn"
-              onclick="location.href = './balance.html'"
+              onclick="location.href = './history.html'"
             >
               거래내역 보기
             </button>
@@ -86,5 +83,34 @@
         </div>
       </div>
     </div>
+
+    <script>
+      const depositAccount = localStorage.getItem("transferDepositAccount");
+      const receiver = localStorage.getItem("transferReceiver");
+      const amount = Number(localStorage.getItem("transferAmount"));
+      const afterBalance = Number(localStorage.getItem("transferAfterBalance"));
+      const dateTime = localStorage.getItem("transferDateTime");
+      const transferNumber = localStorage.getItem("transferNumber");
+
+      function formatMoney(value) {
+        return value.toLocaleString("ko-KR") + "원";
+      }
+
+      if (!depositAccount || !receiver || !amount) {
+        alert("송금 정보가 없습니다. 송금 화면으로 이동합니다.");
+        location.href = "./transfer.html";
+      } else {
+        document.getElementById("completeAmount").textContent =
+          formatMoney(amount);
+        document.getElementById("completeReceiver").textContent = receiver;
+        document.getElementById("completeDepositAccount").textContent =
+          depositAccount;
+        document.getElementById("completeDateTime").textContent = dateTime;
+        document.getElementById("completeTransferNumber").textContent =
+          transferNumber;
+        document.getElementById("completeAfterBalance").textContent =
+          formatMoney(afterBalance);
+      }
+    </script>
   </body>
 </html>

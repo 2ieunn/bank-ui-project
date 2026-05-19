@@ -6,6 +6,7 @@
     <title>송금 확인</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <div class="transfer-page">
       <div class="transfer-container">
@@ -23,27 +24,27 @@
           <div class="confirm-info-list">
             <div class="confirm-info-row">
               <span>받는 계좌</span>
-              <strong>333-456-789000</strong>
+              <strong id="confirmDepositAccount">-</strong>
             </div>
 
             <div class="confirm-info-row">
               <span>받는 사람</span>
-              <strong>이지은</strong>
+              <strong id="confirmReceiver">-</strong>
             </div>
 
             <div class="confirm-info-row">
               <span>송금 금액</span>
-              <strong class="confirm-amount">5,000원</strong>
+              <strong class="confirm-amount" id="confirmAmount">-</strong>
             </div>
 
             <div class="confirm-info-row">
               <span>수수료</span>
-              <strong>0원</strong>
+              <strong id="confirmFee">0원</strong>
             </div>
 
             <div class="confirm-info-row">
               <span>출금 계좌</span>
-              <strong>110-123-456789</strong>
+              <strong id="confirmWithdrawAccount">-</strong>
             </div>
           </div>
 
@@ -71,5 +72,31 @@
         </div>
       </div>
     </div>
+
+    <script>
+      const withdrawAccount = localStorage.getItem("transferWithdrawAccount");
+      const depositAccount = localStorage.getItem("transferDepositAccount");
+      const receiver = localStorage.getItem("transferReceiver");
+      const amount = Number(localStorage.getItem("transferAmount"));
+      const fee = Number(localStorage.getItem("transferFee"));
+
+      function formatMoney(value) {
+        return value.toLocaleString("ko-KR") + "원";
+      }
+
+      if (!depositAccount || !receiver || !amount) {
+        alert("송금 정보가 없습니다. 송금 화면으로 이동합니다.");
+        location.href = "./transfer.html";
+      } else {
+        document.getElementById("confirmDepositAccount").textContent =
+          depositAccount;
+        document.getElementById("confirmReceiver").textContent = receiver;
+        document.getElementById("confirmAmount").textContent =
+          formatMoney(amount);
+        document.getElementById("confirmFee").textContent = formatMoney(fee);
+        document.getElementById("confirmWithdrawAccount").textContent =
+          withdrawAccount;
+      }
+    </script>
   </body>
 </html>

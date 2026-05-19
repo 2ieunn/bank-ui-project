@@ -6,6 +6,7 @@
     <title>송금 요청</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <div class="transfer-page">
       <div class="transfer-container">
@@ -20,7 +21,7 @@
             <strong>10,000원</strong>
           </div>
 
-          <form class="transfer-form">
+          <form class="transfer-form" id="transferForm">
             <label for="withdraw-account">출금 계좌</label>
             <select id="withdraw-account" class="transfer-select">
               <option value="main-account">주 계좌 110-123-456789</option>
@@ -31,8 +32,10 @@
             <input
               type="text"
               id="deposit-account"
-              placeholder="입금 계좌번호를 입력하세요"
+              placeholder="예: 333-456-789000"
+              maxlength="14"
             />
+            <p class="error-message" id="depositAccountError"></p>
 
             <div class="receiver-check-box">
               <div>
@@ -43,12 +46,12 @@
             </div>
 
             <label for="amount">송금 금액</label>
-
             <input
               type="text"
               id="amount"
               placeholder="송금할 금액을 입력하세요"
             />
+            <p class="error-message" id="amountError"></p>
 
             <label for="transfer-memo">메모 / 받는 통장 표시명</label>
             <input
@@ -64,7 +67,7 @@
               </div>
               <div>
                 <span>출금 후 예상 잔액</span>
-                <strong>0원</strong>
+                <strong id="expectedBalance">10,000원</strong>
               </div>
             </div>
 
@@ -72,16 +75,128 @@
               출금 가능 금액 이하로 입력해주세요.
             </p>
 
-            <button
-              type="button"
-              class="transfer-submit-btn"
-              onclick="location.href = './transfer-confirm.html'"
-            >
+            <button type="submit" class="transfer-submit-btn">
               송금 요청
             </button>
           </form>
         </div>
       </div>
     </div>
+
+    <script>
+      const transferForm = document.getElementById("transferForm");
+      const depositAccount = document.getElementById("deposit-account");
+      const amount = document.getElementById("amount");
+
+      const depositAccountError = document.getElementById("depositAccountError");
+      const amountError = document.getElementById("amountError");
+      const expectedBalance = document.getElementById("expectedBalance");
+
+      const availableBalance = 10000;
+
+      function formatMoney(value) {
+        return value.toLocaleString("ko-KR") + "원";
+      }
+
+      function clearErrors() {
+        depositAccountError.textContent = "";
+        amountError.textContent = "";
+
+        depositAccount.classList.remove("input-error");
+        amount.classList.remove("input-error");
+      }
+
+      function showError(input, errorElement, message) {
+        errorElement.textContent = message;
+        input.classList.add("input-error");
+      }
+
+      // 입금 계좌번호: 숫자만 입력 + 자동 하이픈
+      // 형식: 333-456-789000
+      depositAccount.addEventListener("input", () => {
+        let value = depositAccount.value.replace(/[^0-9]/g, "");
+
+        if (value.length > 12) {
+          value = value.slice(0, 12);
+        }
+
+        if (value.length > 3 && value.length <= 6) {
+          value = value.slice(0, 3) + "-" + value.slice(3);
+        } else if (value.length > 6) {
+          value =
+            value.slice(0, 3) +
+            "-" +
+            value.slice(3, 6) +
+            "-" +
+            value.slice(6);
+        }
+
+        depositAccount.value = value;
+      });
+
+      // 송금 금액: 숫자만 입력
+      amount.addEventListener("input", () => {
+        amount.value = amount.value.replace(/[^0-9]/g, "");
+
+        const amountNumber = Number(amount.value || 0);
+        const remainBalance = availableBalance - amountNumber;
+
+        if (remainBalance >= 0) {
+          expectedBalance.textContent = formatMoney(remainBalance);
+        } else {
+          expectedBalance.textContent = "초과";
+        }
+      });
+
+      transferForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearErrors();
+
+        let isValid = true;
+
+        const accountValue = depositAccount.value.trim();
+        const amountValue = amount.value.trim();
+        const amountNumber = Number(amountValue);
+
+        const accountPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{6}$/;
+
+        if (accountValue === "") {
+          showError(
+            depositAccount,
+            depositAccountError,
+            "입금 계좌번호를 입력해주세요."
+          );
+          isValid = false;
+        } else if (!accountPattern.test(accountValue)) {
+          showError(
+            depositAccount,
+            depositAccountError,
+            "계좌번호는 333-456-789000 형식으로 입력해주세요."
+          );
+          isValid = false;
+        }
+
+        if (amountValue === "") {
+          showError(amount, amountError, "송금 금액을 입력해주세요.");
+          isValid = false;
+        } else if (amountNumber <= 0) {
+          showError(amount, amountError, "송금 금액은 1원 이상이어야 합니다.");
+          isValid = false;
+        } else if (amountNumber > availableBalance) {
+          showError(
+            amount,
+            amountError,
+            "출금 가능 금액 10,000원을 초과할 수 없습니다."
+          );
+          isValid = false;
+        }
+
+        if (!isValid) {
+          return;
+        }
+
+        location.href = "./transfer-confirm.html";
+      });
+    </script>
   </body>
 </html>
