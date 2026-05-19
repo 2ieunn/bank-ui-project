@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>송금 확인</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="transfer-page">
+      <div class="transfer-container">
+        <div class="transfer-header">
+          <h1>송금 확인</h1>
+          <p>입력한 송금 정보를 확인한 뒤 최종 송금을 진행해주세요.</p>
+        </div>
+
+        <div class="transfer-card">
+          <div class="confirm-title-box">
+            <span>확인 필요</span>
+            <strong>아래 정보가 맞는지 확인해주세요.</strong>
+          </div>
+
+          <div class="confirm-info-list">
+            <div class="confirm-info-row">
+              <span>받는 계좌</span>
+              <strong>333-456-789000</strong>
+            </div>
+
+            <div class="confirm-info-row">
+              <span>받는 사람</span>
+              <strong>이지은</strong>
+            </div>
+
+            <div class="confirm-info-row">
+              <span>송금 금액</span>
+              <strong class="confirm-amount">5,000원</strong>
+            </div>
+
+            <div class="confirm-info-row">
+              <span>수수료</span>
+              <strong>0원</strong>
+            </div>
+
+            <div class="confirm-info-row">
+              <span>출금 계좌</span>
+              <strong>110-123-456789</strong>
+            </div>
+          </div>
+
+          <p class="transfer-info-text">
+            확인 후 송금 버튼을 누르면 송금 요청이 완료됩니다.
+          </p>
+
+          <div class="confirm-button-group">
+            <button
+              type="button"
+              class="confirm-edit-btn"
+              onclick="location.href = './transfer.html'"
+            >
+              수정
+            </button>
+
+            <button
+              type="button"
+              class="transfer-submit-btn"
+              onclick="location.href = './balance.html'"
+            >
+              확인 후 송금
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

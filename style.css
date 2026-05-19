@@ -904,3 +904,117 @@ button {
   font-weight: 600;
   color: #111827;
 }
+
+/* =========================
+   transfer-confirm.html 송금 확인 화면
+========================= */
+
+.confirm-title-box {
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  border: 1px solid #dbe6f5;
+  border-radius: 10px;
+  background: #edf4fb;
+}
+
+.confirm-title-box span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4164a6;
+}
+
+.confirm-title-box strong {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.confirm-info-list {
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #ffffff;
+}
+
+.confirm-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 0 18px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.confirm-info-row:last-child {
+  border-bottom: none;
+}
+
+.confirm-info-row span {
+  font-size: 15px;
+  font-weight: 400;
+  color: #555b67;
+}
+
+.confirm-info-row strong {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+  text-align: right;
+}
+
+.confirm-amount {
+  color: #4164a6 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+
+.confirm-button-group {
+  display: flex;
+  gap: 12px;
+}
+
+.confirm-edit-btn {
+  width: 35%;
+  /* height: 56px; */
+  border: 1px solid #bfc3ca;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  cursor: pointer;
+}
+
+.confirm-edit-btn:hover {
+  background: #f9fafb;
+}
+
+.confirm-button-group .transfer-submit-btn {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .confirm-button-group {
+    flex-direction: column;
+  }
+
+  .confirm-edit-btn,
+  .confirm-button-group .transfer-submit-btn {
+    width: 100%;
+  }
+
+  .confirm-info-row {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px 18px;
+  }
+
+  .confirm-info-row strong {
+    text-align: left;
+  }
+}
