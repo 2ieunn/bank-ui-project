@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>송금 완료</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="transfer-page">
+      <div class="transfer-container">
+        <div class="transfer-header">
+          <h1>송금 완료</h1>
+          <p>송금이 정상적으로 완료되었습니다.</p>
+        </div>
+
+        <div class="transfer-card">
+          <!-- 송금 완료 메시지 영역 -->
+          <div class="complete-message-box">
+            <div class="complete-icon">✓</div>
+
+            <h2>송금이 완료되었습니다</h2>
+            <p>요청하신 금액이 받는 사람 계좌로 정상 송금되었습니다.</p>
+          </div>
+
+          <!-- 송금 완료 상세 정보 영역 -->
+          <div class="complete-info-list">
+            <div class="complete-info-row">
+              <span>송금 금액</span>
+              <strong class="complete-amount">5,000원</strong>
+            </div>
+
+            <div class="complete-info-row">
+              <span>받는 사람</span>
+              <strong>이지은</strong>
+            </div>
+
+            <div class="complete-info-row">
+              <span>받는 계좌</span>
+              <strong>333-456-789000</strong>
+            </div>
+
+            <div class="complete-info-row">
+              <span>거래 일시</span>
+              <strong>2026.05.19 14:30</strong>
+            </div>
+
+            <div class="complete-info-row">
+              <span>거래번호</span>
+              <strong>TR-20260519-001</strong>
+            </div>
+
+            <div class="complete-info-row">
+              <span>잔액</span>
+              <strong>5,000원</strong>
+            </div>
+          </div>
+
+          <!-- 버튼 영역 -->
+          <div class="complete-button-group">
+            <button
+              type="button"
+              class="complete-sub-btn"
+              onclick="location.href = './balance.html'"
+            >
+              거래내역 보기
+            </button>
+
+            <button
+              type="button"
+              class="complete-sub-btn"
+              onclick="location.href = './transfer.html'"
+            >
+              추가 송금
+            </button>
+
+            <button
+              type="button"
+              class="transfer-submit-btn"
+              onclick="location.href = './account.html'"
+            >
+              메인으로
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

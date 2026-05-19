@@ -1018,3 +1018,130 @@ button {
     text-align: left;
   }
 }
+
+/* =========================
+   transfer-complete.html 송금 완료 화면
+========================= */
+
+.complete-message-box {
+  padding: 30px 20px;
+  margin-bottom: 24px;
+  border: 1px solid #dbe6f5;
+  border-radius: 12px;
+  background: #edf4fb;
+  text-align: center;
+}
+
+.complete-icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #4164a6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.complete-message-box h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  color: #111827;
+}
+
+.complete-message-box p {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #5f6673;
+}
+
+.complete-info-list {
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #ffffff;
+}
+
+.complete-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 0 18px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.complete-info-row:last-child {
+  border-bottom: none;
+}
+
+.complete-info-row span {
+  font-size: 15px;
+  font-weight: 400;
+  color: #555b67;
+}
+
+.complete-info-row strong {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+  text-align: right;
+}
+
+.complete-amount {
+  color: #4164a6 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+
+.complete-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.complete-sub-btn {
+  width: 100%;
+  height: 52px;
+  border: 1px solid #bfc3ca;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  cursor: pointer;
+}
+
+.complete-sub-btn:hover {
+  background: #f9fafb;
+}
+
+.complete-button-group .transfer-submit-btn {
+  width: 100%;
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .complete-info-row {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px 18px;
+  }
+
+  .complete-info-row strong {
+    text-align: left;
+  }
+
+  .complete-message-box {
+    padding: 26px 18px;
+  }
+}
