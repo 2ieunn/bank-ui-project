@@ -21,6 +21,27 @@
           </div>
 
           <form class="transfer-form">
+            <label for="withdraw-account">출금 계좌</label>
+            <select id="withdraw-account" class="transfer-select">
+              <option value="main-account">주 계좌 110-123-456789</option>
+              <option value="sub-account">생활비 계좌 110-987-654321</option>
+            </select>
+
+            <label for="deposit-account">입금 계좌번호</label>
+            <input
+              type="text"
+              id="deposit-account"
+              placeholder="입금 계좌번호를 입력하세요"
+            />
+
+            <div class="receiver-check-box">
+              <div>
+                <span>예금주 확인</span>
+                <strong>이지은</strong>
+              </div>
+              <button type="button" class="receiver-check-btn">확인</button>
+            </div>
+
             <label for="amount">송금 금액</label>
 
             <input
@@ -28,6 +49,24 @@
               id="amount"
               placeholder="송금할 금액을 입력하세요"
             />
+
+            <label for="transfer-memo">메모 / 받는 통장 표시명</label>
+            <input
+              type="text"
+              id="transfer-memo"
+              placeholder="표시할 내용을 입력하세요 예: 생활비, 회비"
+            />
+
+            <div class="transfer-summary-box">
+              <div>
+                <span>송금 수수료</span>
+                <strong>0원</strong>
+              </div>
+              <div>
+                <span>출금 후 예상 잔액</span>
+                <strong>0원</strong>
+              </div>
+            </div>
 
             <p class="transfer-info-text">
               출금 가능 금액 이하로 입력해주세요.

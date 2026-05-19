@@ -815,3 +815,92 @@ button {
   background: #e5e7eb;
   margin-bottom: 20px;
 }
+
+/* transfer.html 추가 입력 영역 스타일 */
+
+.transfer-select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #cfd4dc;
+  border-radius: 7px;
+  padding: 0 14px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  color: #111827;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.transfer-select:focus {
+  border-color: #7f8de8;
+}
+
+.receiver-check-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+  background-color: #f8fafc;
+}
+
+.receiver-check-box span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #7b8494;
+}
+
+.receiver-check-box strong {
+  font-size: 17px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.receiver-check-btn {
+  min-width: 72px;
+  height: 38px;
+  border: 1px solid #bfc3ca;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.receiver-check-btn:hover {
+  background-color: #f9fafb;
+}
+
+.transfer-summary-box {
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+  background-color: #edf4fb;
+}
+
+.transfer-summary-box div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.transfer-summary-box div + div {
+  margin-top: 12px;
+}
+
+.transfer-summary-box span {
+  font-size: 14px;
+  color: #555b67;
+}
+
+.transfer-summary-box strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
