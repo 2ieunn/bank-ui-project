@@ -6,6 +6,7 @@
     <title>자산 현황</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <main class="dashboard-page">
       <aside class="sidebar">
@@ -26,9 +27,9 @@
           <nav class="menu-section">
             <p class="menu-title">메뉴</p>
 
-           <a href="./account.html" class="menu-item active">
-            <span class="menu-icon">⌂</span>
-            <span>자산 현황</span>
+            <a href="./account.html" class="menu-item active">
+              <span class="menu-icon">⌂</span>
+              <span>자산 현황</span>
             </a>
 
             <a href="./transfer.html" class="menu-item">
@@ -88,20 +89,20 @@
         <section class="summary-grid">
           <article class="summary-card main-balance">
             <p>총 자산</p>
-            <strong>10,000원</strong>
+            <strong id="totalAssetText">10,000원</strong>
             <span>⟳ 보안 연결됨</span>
           </article>
 
           <article class="summary-card">
             <p>이번 달 수입</p>
-            <strong>0원</strong>
+            <strong id="monthIncomeText">0원</strong>
             <span>내역 없음</span>
           </article>
 
           <article class="summary-card">
             <p>이번 달 지출</p>
-            <strong>0원</strong>
-            <span>내역 없음</span>
+            <strong id="monthExpenseText">0원</strong>
+            <span id="expenseStatusText">내역 없음</span>
           </article>
         </section>
 
@@ -120,7 +121,7 @@
                 <span>100-1234-5678</span>
               </div>
 
-              <strong>10,000원</strong>
+              <strong id="accountBalanceText">10,000원</strong>
             </div>
 
             <div class="account-divider"></div>
@@ -181,5 +182,42 @@
         </div>
       </section>
     </main>
+
+    <script>
+      function formatMoney(value) {
+        return Number(value).toLocaleString("ko-KR") + "원";
+      }
+
+      const currentBalance = Number(
+        localStorage.getItem("currentBalance") || 10000
+      );
+
+      const transferHistories = JSON.parse(
+        localStorage.getItem("transferHistories") || "[]"
+      );
+
+      const totalTransferExpense = transferHistories.reduce((sum, item) => {
+        if (item.type === "송금") {
+          return sum + Number(item.amount);
+        }
+
+        return sum;
+      }, 0);
+
+      document.getElementById("totalAssetText").textContent =
+        formatMoney(currentBalance);
+
+      document.getElementById("accountBalanceText").textContent =
+        formatMoney(currentBalance);
+
+      document.getElementById("monthExpenseText").textContent =
+        formatMoney(totalTransferExpense);
+
+      if (totalTransferExpense > 0) {
+        document.getElementById("expenseStatusText").textContent = "송금 내역 있음";
+      } else {
+        document.getElementById("expenseStatusText").textContent = "내역 없음";
+      }
+    </script>
   </body>
 </html>

@@ -21,14 +21,15 @@ button {
   font-family: inherit;
 }
 
-/* 로그인 화면 */
+/* =========================
+   로그인 화면: index.html
+========================= */
 .page {
   width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
   background: #f4f7fb;
 }
 
@@ -39,7 +40,6 @@ button {
   border: 1px solid #e1e7ef;
   border-radius: 22px;
   padding: 56px 46px 42px;
-  margin: 0 auto;
 }
 
 .login-header h1 {
@@ -197,7 +197,9 @@ button {
   font-weight: 500;
 }
 
-/* 로그인 후 자산 화면 */
+/* =========================
+   공통 레이아웃: account.html / history.html
+========================= */
 .dashboard-page {
   width: 100%;
   min-height: 100vh;
@@ -206,8 +208,10 @@ button {
 }
 
 .sidebar {
-  width: 296px;
+  width: 340px;
+  min-width: 340px;
   min-height: 100vh;
+  flex-shrink: 0;
   background: #ffffff;
   border-right: 1px solid #dfe3e8;
   display: flex;
@@ -249,6 +253,7 @@ button {
   align-items: center;
   justify-content: center;
   font-weight: 500;
+  flex-shrink: 0;
 }
 
 .profile-box strong {
@@ -265,6 +270,7 @@ button {
 }
 
 .menu-section {
+  width: 100%;
   padding-top: 6px;
 }
 
@@ -280,30 +286,50 @@ button {
 }
 
 .menu-item {
-  height: 48px;
+  width: 100%;
+  height: 54px;
   display: flex;
   align-items: center;
-  gap: 17px;
-  padding: 0 46px;
-  color: #363c48;
+  gap: 18px;
+  padding: 0 52px;
+  color: #1f2937;
   font-size: 16px;
   font-weight: 400;
+  white-space: nowrap;
 }
 
-.menu-item span {
-  width: 20px;
-  color: #4765a6;
+.menu-item > span:first-child {
+  width: 22px;
+  min-width: 22px;
+  text-align: center;
   font-size: 20px;
+  flex-shrink: 0;
+  color: #5367aa;
+}
+
+.menu-item > span:last-child {
+  width: auto;
+  white-space: nowrap;
+}
+
+.menu-icon {
+  width: 22px;
+  min-width: 22px;
+  text-align: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  color: #5367aa;
 }
 
 .menu-item.active {
-  background: #edf3fb;
-  color: #2e4f8e;
-  border-left: 3px solid #416bb0;
-  padding-left: 43px;
+  background: #eef2f8;
+  color: #5367aa;
+  border-left: 3px solid #5367aa;
+  padding-left: 49px;
 }
 
-.logout-button {
+.logout-button,
+.logout-btn {
   height: 48px;
   margin: 0 0 18px 46px;
   border: none;
@@ -316,6 +342,9 @@ button {
   cursor: pointer;
 }
 
+/* =========================
+   자산 현황 화면: account.html
+========================= */
 .dashboard-content {
   flex: 1;
   padding: 31px 54px 0 19px;
@@ -364,20 +393,21 @@ button {
   margin-top: 30px;
 }
 
-.summary-card {
+.summary-grid .summary-card {
   height: 159px;
   background: #ffffff;
   border: 1px solid #dfe2e7;
   border-radius: 10px;
-  padding: 26px 26px;
+  padding: 26px;
 }
 
-.summary-card p {
+.summary-grid .summary-card p {
   font-size: 15px;
   color: #555b67;
+  margin: 0;
 }
 
-.summary-card strong {
+.summary-grid .summary-card strong {
   display: block;
   margin-top: 17px;
   font-size: 28px;
@@ -386,7 +416,7 @@ button {
   color: #222;
 }
 
-.summary-card span {
+.summary-grid .summary-card span {
   display: inline-flex;
   margin-top: 18px;
   padding: 5px 12px;
@@ -396,18 +426,18 @@ button {
   color: #6b6f78;
 }
 
-.main-balance {
+.summary-grid .main-balance {
   background: #4164a6;
   color: #ffffff;
   border: none;
 }
 
-.main-balance p,
-.main-balance strong {
+.summary-grid .main-balance p,
+.summary-grid .main-balance strong {
   color: #ffffff;
 }
 
-.main-balance span {
+.summary-grid .main-balance span {
   background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
 }
@@ -464,6 +494,7 @@ button {
   align-items: center;
   justify-content: center;
   margin-right: 15px;
+  flex-shrink: 0;
 }
 
 .account-info p {
@@ -523,6 +554,7 @@ button {
   align-items: center;
   justify-content: center;
   font-size: 20px;
+  flex-shrink: 0;
 }
 
 .add-account p {
@@ -608,7 +640,10 @@ button {
   color: #4164a6;
   font-size: 15px;
 }
-/* 송금 요청 화면 */
+
+/* =========================
+   송금 요청 화면: transfer.html
+========================= */
 .transfer-page {
   width: 100%;
   min-height: 100vh;
@@ -709,7 +744,7 @@ button {
 
 .transfer-info-text {
   width: 100%;
-  height: 39px;
+  min-height: 39px;
   background: #eff6ff;
   border-radius: 7px;
   color: #4169e1;
@@ -718,7 +753,7 @@ button {
   letter-spacing: -0.3px;
   display: flex;
   align-items: center;
-  padding: 0 14px;
+  padding: 10px 14px;
   margin-top: 16px;
   margin-bottom: 18px;
 }
@@ -739,84 +774,6 @@ button {
 .transfer-submit-btn:hover {
   background: #4356c7;
 }
-/* 잔액 조회 화면 */
-.balance-page {
-  width: 100%;
-  min-height: 100vh;
-  background: #f4f7fb;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.balance-container {
-  width: 470px;
-  margin-top: 16px;
-}
-
-.balance-header {
-  margin-bottom: 18px;
-}
-
-.balance-header h1 {
-  font-size: 27px;
-  font-weight: 600;
-  letter-spacing: -0.8px;
-  color: #111827;
-  line-height: 1.25;
-}
-
-.balance-header p {
-  margin-top: 7px;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.3px;
-  color: #7b8494;
-}
-
-.balance-card {
-  width: 100%;
-  background: #ffffff;
-  border: 1px solid #e1e7ef;
-  border-radius: 14px;
-  padding: 28px 24px;
-  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
-}
-
-.balance-section {
-  padding: 0 0 20px;
-}
-
-.balance-section p {
-  font-size: 13px;
-  font-weight: 500;
-  color: #6b7280;
-  letter-spacing: -0.3px;
-  margin-bottom: 7px;
-}
-
-.balance-section strong {
-  display: block;
-  font-size: 15px;
-  font-weight: 700;
-  color: #111827;
-  letter-spacing: -0.3px;
-}
-
-.current-balance strong {
-  font-size: 28px;
-  color: #4f63df;
-  letter-spacing: -1px;
-}
-
-.balance-line {
-  width: 100%;
-  height: 1px;
-  background: #e5e7eb;
-  margin-bottom: 20px;
-}
-
-/* transfer.html 추가 입력 영역 스타일 */
 
 .transfer-select {
   width: 100%;
@@ -906,9 +863,87 @@ button {
 }
 
 /* =========================
-   transfer-confirm.html 송금 확인 화면
+   잔액 조회 화면: balance.html
 ========================= */
+.balance-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f4f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 
+.balance-container {
+  width: 470px;
+  margin-top: 16px;
+}
+
+.balance-header {
+  margin-bottom: 18px;
+}
+
+.balance-header h1 {
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+  color: #111827;
+  line-height: 1.25;
+}
+
+.balance-header p {
+  margin-top: 7px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  color: #7b8494;
+}
+
+.balance-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e1e7ef;
+  border-radius: 14px;
+  padding: 28px 24px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+}
+
+.balance-section {
+  padding: 0 0 20px;
+}
+
+.balance-section p {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  letter-spacing: -0.3px;
+  margin-bottom: 7px;
+}
+
+.balance-section strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.3px;
+}
+
+.current-balance strong {
+  font-size: 28px;
+  color: #4f63df;
+  letter-spacing: -1px;
+}
+
+.balance-line {
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   송금 확인 화면: transfer-confirm.html
+========================= */
 .confirm-title-box {
   padding: 18px 20px;
   margin-bottom: 24px;
@@ -979,7 +1014,7 @@ button {
 
 .confirm-edit-btn {
   width: 35%;
-  /* height: 56px; */
+  height: 45px;
   border: 1px solid #bfc3ca;
   border-radius: 8px;
   background: #ffffff;
@@ -998,31 +1033,9 @@ button {
   flex: 1;
 }
 
-@media (max-width: 600px) {
-  .confirm-button-group {
-    flex-direction: column;
-  }
-
-  .confirm-edit-btn,
-  .confirm-button-group .transfer-submit-btn {
-    width: 100%;
-  }
-
-  .confirm-info-row {
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 16px 18px;
-  }
-
-  .confirm-info-row strong {
-    text-align: left;
-  }
-}
-
 /* =========================
-   transfer-complete.html 송금 완료 화면
+   송금 완료 화면: transfer-complete.html
 ========================= */
-
 .complete-message-box {
   padding: 30px 20px;
   margin-bottom: 24px;
@@ -1130,26 +1143,15 @@ button {
   margin-top: 4px;
 }
 
-@media (max-width: 600px) {
-  .complete-info-row {
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 16px 18px;
-  }
-
-  .complete-info-row strong {
-    text-align: left;
-  }
-
-  .complete-message-box {
-    padding: 26px 18px;
-  }
-}
+/* =========================
+   거래 내역 화면: history.html
+========================= */
 .content-area {
   flex: 1;
   padding: 40px 48px;
   background: #fbfcff;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .page-header {
@@ -1193,20 +1195,21 @@ button {
   margin-bottom: 28px;
 }
 
-.summary-card {
+.history-summary .summary-card {
+  height: auto;
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 14px;
   padding: 24px;
 }
 
-.summary-card p {
+.history-summary .summary-card p {
   color: #6b7280;
   font-size: 15px;
   margin-bottom: 18px;
 }
 
-.summary-card strong {
+.history-summary .summary-card strong {
   font-size: 30px;
   color: #111827;
 }
@@ -1342,57 +1345,9 @@ button {
   font-size: 15px;
 }
 
-.menu-item {
-  text-decoration: none;
-  color: inherit;
-}
-/* 사이드바 메뉴 글자 겹침 수정 */
-.sidebar {
-  width: 340px;
-  min-width: 340px;
-  flex-shrink: 0;
-}
-
-.menu-section {
-  width: 100%;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-
-  width: 100%;
-  height: 54px;
-
-  padding: 0 52px;
-  box-sizing: border-box;
-
-  text-decoration: none;
-  color: #1f2937;
-
-  font-size: 16px;
-  white-space: nowrap;
-}
-
-.menu-item span {
-  white-space: nowrap;
-}
-
-.menu-icon {
-  width: 22px;
-  min-width: 22px;
-  text-align: center;
-  font-size: 20px;
-  flex-shrink: 0;
-  color: #5367aa;
-}
-
-.menu-item.active {
-  background: #eef2f8;
-  color: #5367aa;
-  border-left: 3px solid #5367aa;
-}
+/* =========================
+   에러 표시
+========================= */
 .error-message {
   min-height: 18px;
   margin-top: 6px;
@@ -1405,15 +1360,82 @@ button {
   border-color: #dc2626 !important;
   background-color: #fff7f7;
 }
-.error-message {
-  min-height: 18px;
-  margin-top: 6px;
-  margin-bottom: 12px;
-  font-size: 13px;
-  color: #dc2626;
+
+/* =========================
+   작은 화면 대응
+========================= */
+@media (max-width: 900px) {
+  .dashboard-page {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    min-height: auto;
+  }
+
+  .dashboard-content,
+  .content-area {
+    padding: 28px 20px;
+  }
+
+  .summary-grid,
+  .history-summary,
+  .main-grid,
+  .filter-area {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header,
+  .dashboard-header {
+    flex-direction: column;
+    gap: 16px;
+  }
 }
 
-.input-error {
-  border-color: #dc2626 !important;
-  background-color: #fff7f7;
+@media (max-width: 600px) {
+  .login-card,
+  .transfer-container,
+  .balance-container {
+    width: calc(100% - 32px);
+  }
+
+  .login-card {
+    min-height: auto;
+    padding: 42px 26px 32px;
+  }
+
+  .bottom-links {
+    flex-wrap: wrap;
+  }
+
+  .confirm-button-group {
+    flex-direction: column;
+  }
+
+  .confirm-edit-btn,
+  .confirm-button-group .transfer-submit-btn {
+    width: 100%;
+  }
+
+  .confirm-info-row,
+  .complete-info-row {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px 18px;
+  }
+
+  .confirm-info-row strong,
+  .complete-info-row strong {
+    text-align: left;
+  }
+
+  .complete-message-box {
+    padding: 26px 18px;
+  }
 }

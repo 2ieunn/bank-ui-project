@@ -46,10 +46,20 @@
               <span>출금 계좌</span>
               <strong id="confirmWithdrawAccount">-</strong>
             </div>
+
+            <div class="confirm-info-row">
+              <span>메모</span>
+              <strong id="confirmMemo">-</strong>
+            </div>
+
+            <div class="confirm-info-row">
+              <span>송금 후 잔액</span>
+              <strong id="confirmAfterBalance">-</strong>
+            </div>
           </div>
 
           <p class="transfer-info-text">
-            확인 후 송금 버튼을 누르면 송금 요청이 완료됩니다.
+            확인 후 송금 버튼을 누르면 송금 완료 화면으로 이동합니다.
           </p>
 
           <div class="confirm-button-group">
@@ -64,7 +74,7 @@
             <button
               type="button"
               class="transfer-submit-btn"
-              onclick="location.href = './transfer-complete.html'"
+              id="finalTransferBtn"
             >
               확인 후 송금
             </button>
@@ -78,25 +88,115 @@
       const depositAccount = localStorage.getItem("transferDepositAccount");
       const receiver = localStorage.getItem("transferReceiver");
       const amount = Number(localStorage.getItem("transferAmount"));
-      const fee = Number(localStorage.getItem("transferFee"));
+      const fee = Number(localStorage.getItem("transferFee") || 0);
+      const memo = localStorage.getItem("transferMemo") || "없음";
+
+      // 현재 잔액이 저장되어 있으면 그 값을 사용하고,
+      // 처음 실행하는 경우에는 기본 잔액 10,000원을 사용
+      const currentBalance = Number(
+        localStorage.getItem("currentBalance") || 10000
+      );
+
+      const afterBalance = currentBalance - amount - fee;
 
       function formatMoney(value) {
         return value.toLocaleString("ko-KR") + "원";
       }
 
-      if (!depositAccount || !receiver || !amount) {
+      function createTransferNumber() {
+        const now = new Date();
+
+        const datePart =
+          now.getFullYear().toString() +
+          String(now.getMonth() + 1).padStart(2, "0") +
+          String(now.getDate()).padStart(2, "0");
+
+        const randomPart = Math.floor(Math.random() * 900000 + 100000);
+
+        return "TR-" + datePart + "-" + randomPart;
+      }
+
+      function createDateTime() {
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const date = String(now.getDate()).padStart(2, "0");
+        const hour = String(now.getHours()).padStart(2, "0");
+        const minute = String(now.getMinutes()).padStart(2, "0");
+        const second = String(now.getSeconds()).padStart(2, "0");
+
+        return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+      }
+
+      if (!withdrawAccount || !depositAccount || !receiver || !amount) {
         alert("송금 정보가 없습니다. 송금 화면으로 이동합니다.");
+        location.href = "./transfer.html";
+      } else if (afterBalance < 0) {
+        alert("잔액이 부족합니다. 송금 화면으로 이동합니다.");
         location.href = "./transfer.html";
       } else {
         document.getElementById("confirmDepositAccount").textContent =
           depositAccount;
+
         document.getElementById("confirmReceiver").textContent = receiver;
+
         document.getElementById("confirmAmount").textContent =
           formatMoney(amount);
+
         document.getElementById("confirmFee").textContent = formatMoney(fee);
+
         document.getElementById("confirmWithdrawAccount").textContent =
           withdrawAccount;
+
+        document.getElementById("confirmMemo").textContent = memo;
+
+        document.getElementById("confirmAfterBalance").textContent =
+          formatMoney(afterBalance);
       }
+
+      document
+        .getElementById("finalTransferBtn")
+        .addEventListener("click", () => {
+          const dateTime = createDateTime();
+          const transferNumber = createTransferNumber();
+
+          // 완료 화면에서 사용할 값 저장
+          localStorage.setItem("transferAfterBalance", afterBalance);
+          localStorage.setItem("transferDateTime", dateTime);
+          localStorage.setItem("transferNumber", transferNumber);
+
+          // 자산 현황 화면에서 사용할 현재 잔액 저장
+          localStorage.setItem("currentBalance", afterBalance);
+
+          // 거래내역 화면에서 사용할 새 거래내역 저장
+          const savedHistories = JSON.parse(
+            localStorage.getItem("transferHistories") || "[]"
+          );
+
+          const newHistory = {
+            date: dateTime.slice(0, 10),
+            dateTime: dateTime,
+            type: "송금",
+            partner: receiver,
+            amount: amount,
+            balance: afterBalance,
+            memo: memo,
+            withdrawAccount: withdrawAccount,
+            depositAccount: depositAccount,
+            transferNumber: transferNumber,
+          };
+
+          // 최신 거래가 맨 위에 오도록 앞에 추가
+          savedHistories.unshift(newHistory);
+
+          localStorage.setItem(
+            "transferHistories",
+            JSON.stringify(savedHistories)
+          );
+
+          location.href = "./transfer-complete.html";
+        });
     </script>
   </body>
 </html>

@@ -18,14 +18,15 @@
         <div class="transfer-card">
           <div class="transfer-balance-box">
             <span>출금 가능 금액</span>
-            <strong>10,000원</strong>
+            <strong id="availableBalanceText">10,000원</strong>
           </div>
 
           <form class="transfer-form" id="transferForm">
             <label for="withdraw-account">출금 계좌</label>
             <select id="withdraw-account" class="transfer-select">
-              <option value="main-account">주 계좌 110-123-456789</option>
-              <option value="sub-account">생활비 계좌 110-987-654321</option>
+              <option value="">출금 계좌를 선택해주세요</option>
+              <option value="110-123-456789">주 계좌 110-123-456789</option>
+              <option value="110-987-654321">생활비 계좌 110-987-654321</option>
             </select>
 
             <label for="deposit-account">입금 계좌번호</label>
@@ -40,9 +41,16 @@
             <div class="receiver-check-box">
               <div>
                 <span>예금주 확인</span>
-                <strong>이지은</strong>
+                <strong id="receiverName">확인 전</strong>
               </div>
-              <button type="button" class="receiver-check-btn">확인</button>
+
+              <button
+                type="button"
+                class="receiver-check-btn"
+                id="receiverCheckBtn"
+              >
+                확인
+              </button>
             </div>
 
             <label for="amount">송금 금액</label>
@@ -57,14 +65,17 @@
             <input
               type="text"
               id="transfer-memo"
-              placeholder="표시할 내용을 입력하세요 예: 생활비, 회비"
+              placeholder="20자 이내로 입력하세요 예: 생활비, 회비"
+              maxlength="20"
             />
+            <p class="error-message" id="memoError"></p>
 
             <div class="transfer-summary-box">
               <div>
                 <span>송금 수수료</span>
                 <strong>0원</strong>
               </div>
+
               <div>
                 <span>출금 후 예상 잔액</span>
                 <strong id="expectedBalance">10,000원</strong>
@@ -83,33 +94,61 @@
 
     <script>
       const transferForm = document.getElementById("transferForm");
+      const withdrawAccount = document.getElementById("withdraw-account");
       const depositAccount = document.getElementById("deposit-account");
       const amount = document.getElementById("amount");
+      const transferMemo = document.getElementById("transfer-memo");
 
+      const availableBalanceText = document.getElementById(
+        "availableBalanceText"
+      );
       const depositAccountError = document.getElementById(
-        "depositAccountError",
+        "depositAccountError"
       );
       const amountError = document.getElementById("amountError");
+      const memoError = document.getElementById("memoError");
       const expectedBalance = document.getElementById("expectedBalance");
 
-      const availableBalance = 10000;
+      const receiverName = document.getElementById("receiverName");
+      const receiverCheckBtn = document.getElementById("receiverCheckBtn");
+
+      const availableBalance = Number(
+        localStorage.getItem("currentBalance") || 10000
+      );
+
+      const myAccounts = ["110-123-456789", "110-987-654321"];
+
+      let isReceiverChecked = false;
+      let checkedReceiver = "";
 
       function formatMoney(value) {
-        return value.toLocaleString("ko-KR") + "원";
+        return Number(value).toLocaleString("ko-KR") + "원";
       }
 
       function clearErrors() {
         depositAccountError.textContent = "";
         amountError.textContent = "";
+        memoError.textContent = "";
 
         depositAccount.classList.remove("input-error");
         amount.classList.remove("input-error");
+        transferMemo.classList.remove("input-error");
       }
 
       function showError(input, errorElement, message) {
         errorElement.textContent = message;
         input.classList.add("input-error");
       }
+
+      function resetReceiverCheck() {
+        isReceiverChecked = false;
+        checkedReceiver = "";
+        receiverName.textContent = "확인 전";
+        receiverCheckBtn.textContent = "확인";
+      }
+
+      availableBalanceText.textContent = formatMoney(availableBalance);
+      expectedBalance.textContent = formatMoney(availableBalance);
 
       // 입금 계좌번호: 숫자만 입력 + 자동 하이픈
       // 형식: 333-456-789000
@@ -128,6 +167,51 @@
         }
 
         depositAccount.value = value;
+
+        // 계좌번호가 바뀌면 예금주 확인 상태 초기화
+        resetReceiverCheck();
+      });
+
+      // 예금주 확인 버튼
+      receiverCheckBtn.addEventListener("click", () => {
+        clearErrors();
+
+        const accountValue = depositAccount.value.trim();
+        const accountPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{6}$/;
+
+        if (accountValue === "") {
+          showError(
+            depositAccount,
+            depositAccountError,
+            "입금 계좌번호를 입력해주세요."
+          );
+          return;
+        }
+
+        if (!accountPattern.test(accountValue)) {
+          showError(
+            depositAccount,
+            depositAccountError,
+            "계좌번호는 333-456-789000 형식으로 입력해주세요."
+          );
+          return;
+        }
+
+        if (myAccounts.includes(accountValue)) {
+          showError(
+            depositAccount,
+            depositAccountError,
+            "본인 계좌로는 송금할 수 없습니다."
+          );
+          return;
+        }
+
+        // 현재는 프론트 화면만 있으므로 임시 예금주 이름 사용
+        checkedReceiver = "이지은";
+        isReceiverChecked = true;
+
+        receiverName.textContent = checkedReceiver;
+        receiverCheckBtn.textContent = "확인완료";
       });
 
       // 송금 금액: 숫자만 입력
@@ -144,30 +228,59 @@
         }
       });
 
+      transferMemo.addEventListener("input", () => {
+        if (transferMemo.value.length > 20) {
+          transferMemo.value = transferMemo.value.slice(0, 20);
+        }
+      });
+
       transferForm.addEventListener("submit", (event) => {
         event.preventDefault();
         clearErrors();
 
         let isValid = true;
 
+        const selectedWithdrawText =
+          withdrawAccount.options[withdrawAccount.selectedIndex].textContent;
+
         const accountValue = depositAccount.value.trim();
         const amountValue = amount.value.trim();
         const amountNumber = Number(amountValue);
+        const memoValue = transferMemo.value.trim();
 
         const accountPattern = /^[0-9]{3}-[0-9]{3}-[0-9]{6}$/;
+
+        if (withdrawAccount.value === "") {
+          alert("출금 계좌를 선택해주세요.");
+          isValid = false;
+        }
 
         if (accountValue === "") {
           showError(
             depositAccount,
             depositAccountError,
-            "입금 계좌번호를 입력해주세요.",
+            "입금 계좌번호를 입력해주세요."
           );
           isValid = false;
         } else if (!accountPattern.test(accountValue)) {
           showError(
             depositAccount,
             depositAccountError,
-            "계좌번호는 333-456-789000 형식으로 입력해주세요.",
+            "계좌번호는 333-456-789000 형식으로 입력해주세요."
+          );
+          isValid = false;
+        } else if (myAccounts.includes(accountValue)) {
+          showError(
+            depositAccount,
+            depositAccountError,
+            "본인 계좌로는 송금할 수 없습니다."
+          );
+          isValid = false;
+        } else if (!isReceiverChecked) {
+          showError(
+            depositAccount,
+            depositAccountError,
+            "예금주 확인을 먼저 해주세요."
           );
           isValid = false;
         }
@@ -182,7 +295,16 @@
           showError(
             amount,
             amountError,
-            "출금 가능 금액 10,000원을 초과할 수 없습니다.",
+            "출금 가능 금액을 초과할 수 없습니다."
+          );
+          isValid = false;
+        }
+
+        if (memoValue.length > 20) {
+          showError(
+            transferMemo,
+            memoError,
+            "메모는 20자 이내로 입력해주세요."
           );
           isValid = false;
         }
@@ -191,14 +313,13 @@
           return;
         }
 
-        localStorage.setItem(
-          "transferWithdrawAccount",
-          "주 계좌 110-123-456789",
-        );
+        localStorage.setItem("transferWithdrawAccount", selectedWithdrawText);
+        localStorage.setItem("transferWithdrawAccountNumber", withdrawAccount.value);
         localStorage.setItem("transferDepositAccount", accountValue);
-        localStorage.setItem("transferReceiver", "이지은");
+        localStorage.setItem("transferReceiver", checkedReceiver);
         localStorage.setItem("transferAmount", amountNumber);
         localStorage.setItem("transferFee", 0);
+        localStorage.setItem("transferMemo", memoValue);
 
         location.href = "./transfer-confirm.html";
       });

@@ -6,6 +6,7 @@
     <title>잔액 조회</title>
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <div class="balance-page">
       <div class="balance-container">
@@ -24,17 +25,81 @@
 
           <div class="balance-section current-balance">
             <p>현재 잔액</p>
-            <strong>10,000원</strong>
+            <strong id="balanceCurrentText">10,000원</strong>
           </div>
 
           <div class="balance-line"></div>
 
           <div class="balance-section">
             <p>출금 가능 금액</p>
-            <strong>10,000원</strong>
+            <strong id="balanceAvailableText">10,000원</strong>
+          </div>
+
+          <div class="balance-line"></div>
+
+          <div class="balance-section">
+            <p>최근 거래 상태</p>
+            <strong id="recentTransferText">최근 송금 내역 없음</strong>
+          </div>
+
+          <div class="complete-button-group">
+            <button
+              type="button"
+              class="complete-sub-btn"
+              onclick="location.href = './history.html'"
+            >
+              거래내역 보기
+            </button>
+
+            <button
+              type="button"
+              class="complete-sub-btn"
+              onclick="location.href = './transfer.html'"
+            >
+              추가 송금
+            </button>
+
+            <button
+              type="button"
+              class="transfer-submit-btn"
+              onclick="location.href = './account.html'"
+            >
+              메인으로
+            </button>
           </div>
         </div>
       </div>
     </div>
+
+    <script>
+      function formatMoney(value) {
+        return Number(value).toLocaleString("ko-KR") + "원";
+      }
+
+      const currentBalance = Number(
+        localStorage.getItem("currentBalance") || 10000
+      );
+
+      const transferHistories = JSON.parse(
+        localStorage.getItem("transferHistories") || "[]"
+      );
+
+      document.getElementById("balanceCurrentText").textContent =
+        formatMoney(currentBalance);
+
+      document.getElementById("balanceAvailableText").textContent =
+        formatMoney(currentBalance);
+
+      if (transferHistories.length > 0) {
+        const recentTransfer = transferHistories[0];
+
+        document.getElementById("recentTransferText").textContent =
+          `${recentTransfer.date} ${recentTransfer.partner}님에게 ` +
+          `${formatMoney(recentTransfer.amount)} 송금`;
+      } else {
+        document.getElementById("recentTransferText").textContent =
+          "최근 송금 내역 없음";
+      }
+    </script>
   </body>
 </html>

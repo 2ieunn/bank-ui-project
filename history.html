@@ -6,6 +6,7 @@
   <title>거래 내역</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <main class="dashboard-page">
     <aside class="sidebar">
@@ -62,7 +63,14 @@
         </nav>
       </div>
 
-      <button class="logout-btn">로그아웃</button>
+      <button
+        class="logout-button"
+        type="button"
+        onclick="location.href = './index.html'"
+      >
+        <span>↪</span>
+        로그아웃
+      </button>
     </aside>
 
     <section class="content-area">
@@ -73,25 +81,25 @@
         </div>
 
         <div class="header-actions">
-          <button class="icon-btn">↻</button>
-          <button class="icon-btn">♧</button>
+          <button class="icon-btn" type="button">↻</button>
+          <button class="icon-btn" type="button">♧</button>
         </div>
       </header>
 
       <section class="history-summary">
         <div class="summary-card">
           <p>이번 달 입금</p>
-          <strong>35,000원</strong>
+          <strong id="monthIncomeText">35,000원</strong>
         </div>
 
         <div class="summary-card">
           <p>이번 달 출금</p>
-          <strong>15,000원</strong>
+          <strong id="monthExpenseText">15,000원</strong>
         </div>
 
         <div class="summary-card">
           <p>현재 잔액</p>
-          <strong>10,000원</strong>
+          <strong id="historyBalanceText">10,000원</strong>
         </div>
       </section>
 
@@ -185,9 +193,68 @@
     const historyBody = document.getElementById("historyBody");
     const emptyMessage = document.getElementById("emptyMessage");
 
-    const rows = Array.from(historyBody.querySelectorAll("tr"));
+    const monthIncomeText = document.getElementById("monthIncomeText");
+    const monthExpenseText = document.getElementById("monthExpenseText");
+    const historyBalanceText = document.getElementById("historyBalanceText");
+
+    function formatMoney(value) {
+      return Number(value).toLocaleString("ko-KR") + "원";
+    }
+
+    function renderSavedHistories() {
+      const savedHistories = JSON.parse(
+        localStorage.getItem("transferHistories") || "[]"
+      );
+
+      if (savedHistories.length === 0) {
+        return;
+      }
+
+      const savedRows = savedHistories
+        .map((item) => {
+          return `
+            <tr>
+              <td>${item.date}</td>
+              <td><span class="type-badge transfer">송금</span></td>
+              <td>${item.partner}</td>
+              <td class="minus">-${formatMoney(item.amount)}</td>
+              <td>${formatMoney(item.balance)}</td>
+            </tr>
+          `;
+        })
+        .join("");
+
+      historyBody.insertAdjacentHTML("afterbegin", savedRows);
+    }
+
+    function updateSummary() {
+      const currentBalance = Number(
+        localStorage.getItem("currentBalance") || 10000
+      );
+
+      const savedHistories = JSON.parse(
+        localStorage.getItem("transferHistories") || "[]"
+      );
+
+      const baseIncome = 35000;
+      const baseExpense = 15000;
+
+      const transferExpense = savedHistories.reduce((sum, item) => {
+        if (item.type === "송금") {
+          return sum + Number(item.amount);
+        }
+
+        return sum;
+      }, 0);
+
+      monthIncomeText.textContent = formatMoney(baseIncome);
+      monthExpenseText.textContent = formatMoney(baseExpense + transferExpense);
+      historyBalanceText.textContent = formatMoney(currentBalance);
+    }
 
     function filterHistory() {
+      const rows = Array.from(historyBody.querySelectorAll("tr"));
+
       const selectedDate = dateFilter.value;
       const selectedType = typeFilter.value;
       const keyword = searchInput.value.trim();
@@ -213,6 +280,10 @@
 
       emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
     }
+
+    renderSavedHistories();
+    updateSummary();
+    filterHistory();
 
     dateFilter.addEventListener("change", filterHistory);
     typeFilter.addEventListener("change", filterHistory);
