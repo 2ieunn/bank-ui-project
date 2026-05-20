@@ -69,7 +69,7 @@
               class="complete-sub-btn"
               onclick="location.href = './transfer.html'"
             >
-            잔액 조회
+              잔액 조회
             </button>
 
             <button
@@ -96,26 +96,89 @@
       const depositAccount = localStorage.getItem("transferDepositAccount");
       const receiver = localStorage.getItem("transferReceiver");
       const amount = Number(localStorage.getItem("transferAmount"));
-      const afterBalance = Number(localStorage.getItem("transferAfterBalance"));
-      const dateTime = localStorage.getItem("transferDateTime");
-      const transferNumber = localStorage.getItem("transferNumber");
+
+      const transferApiResultText = localStorage.getItem("transferApiResult");
 
       function formatMoney(value) {
-        return value.toLocaleString("ko-KR") + "원";
+        const numberValue = Number(value);
+
+        if (Number.isNaN(numberValue)) {
+          return "-";
+        }
+
+        return numberValue.toLocaleString("ko-KR") + "원";
       }
 
-      if (!depositAccount || !receiver || !amount) {
-        alert("송금 정보가 없습니다. 송금 화면으로 이동합니다.");
+      function safeText(value) {
+        if (value === null || value === undefined || value === "") {
+          return "-";
+        }
+
+        return value;
+      }
+
+      function getTransferApiResult() {
+        if (!transferApiResultText) {
+          return null;
+        }
+
+        try {
+          return JSON.parse(transferApiResultText);
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function isValidTransferResult(result) {
+        if (!result) {
+          return false;
+        }
+
+        if (!result.transferDateTime) {
+          return false;
+        }
+
+        if (!result.transferNumber) {
+          return false;
+        }
+
+        if (Number.isNaN(Number(result.afterBalance))) {
+          return false;
+        }
+
+        return true;
+      }
+
+      const transferApiResult = getTransferApiResult();
+
+      if (
+        !depositAccount ||
+        !receiver ||
+        !amount ||
+        !isValidTransferResult(transferApiResult)
+      ) {
+        alert("송금 완료 정보가 올바르지 않습니다. 송금 화면으로 이동합니다.");
         location.href = "./transfer.html";
       } else {
+        const transferDateTime = transferApiResult.transferDateTime;
+        const transferNumber = transferApiResult.transferNumber;
+        const afterBalance = Number(transferApiResult.afterBalance);
+
         document.getElementById("completeAmount").textContent =
           formatMoney(amount);
-        document.getElementById("completeReceiver").textContent = receiver;
+
+        document.getElementById("completeReceiver").textContent =
+          safeText(receiver);
+
         document.getElementById("completeDepositAccount").textContent =
-          depositAccount;
-        document.getElementById("completeDateTime").textContent = dateTime;
+          safeText(depositAccount);
+
+        document.getElementById("completeDateTime").textContent =
+          safeText(transferDateTime);
+
         document.getElementById("completeTransferNumber").textContent =
-          transferNumber;
+          safeText(transferNumber);
+
         document.getElementById("completeAfterBalance").textContent =
           formatMoney(afterBalance);
       }
