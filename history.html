@@ -1,300 +1,417 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>거래 내역</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>거래 내역</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-  <main class="dashboard-page">
-    <aside class="sidebar">
-      <div>
-        <div class="logo-area">
-          <div class="logo-icon">▤</div>
-          <span>송금시스템</span>
-        </div>
-
-        <div class="profile-box">
-          <div class="profile-circle">김</div>
-          <div>
-            <strong>김민영 님</strong>
-            <p>일반 회원</p>
-          </div>
-        </div>
-
-        <nav class="menu-section">
-          <p class="menu-title">메뉴</p>
-
-          <a href="account.html" class="menu-item">
-            <span class="menu-icon">⌂</span>
-            <span>자산 현황</span>
-          </a>
-
-          <a href="transfer.html" class="menu-item">
-            <span class="menu-icon">⇄</span>
-            <span>이체</span>
-          </a>
-
-          <a href="history.html" class="menu-item active">
-            <span class="menu-icon">〰</span>
-            <span>거래 내역</span>
-          </a>
-
-          <a href="#" class="menu-item">
-            <span class="menu-icon">▣</span>
-            <span>계좌 관리</span>
-          </a>
-        </nav>
-
-        <nav class="menu-section">
-          <p class="menu-title">설정</p>
-
-          <a href="#" class="menu-item">
-            <span class="menu-icon">▣</span>
-            <span>보안 설정</span>
-          </a>
-
-          <a href="#" class="menu-item">
-            <span class="menu-icon">◎</span>
-            <span>고객 지원</span>
-          </a>
-        </nav>
-      </div>
-
-      <button
-        class="logout-button"
-        type="button"
-        onclick="location.href = './index.html'"
-      >
-        <span>↪</span>
-        로그아웃
-      </button>
-    </aside>
-
-    <section class="content-area">
-      <header class="page-header">
+  <body>
+    <main class="dashboard-page">
+      <aside class="sidebar">
         <div>
-          <h1>거래 내역</h1>
-          <p>입금, 출금, 송금 내역을 확인할 수 있어요.</p>
-        </div>
-
-        <div class="header-actions">
-          <button class="icon-btn" type="button">↻</button>
-          <button class="icon-btn" type="button">♧</button>
-        </div>
-      </header>
-
-      <section class="history-summary">
-        <div class="summary-card">
-          <p>이번 달 입금</p>
-          <strong id="monthIncomeText">35,000원</strong>
-        </div>
-
-        <div class="summary-card">
-          <p>이번 달 출금</p>
-          <strong id="monthExpenseText">15,000원</strong>
-        </div>
-
-        <div class="summary-card">
-          <p>현재 잔액</p>
-          <strong id="historyBalanceText">10,000원</strong>
-        </div>
-      </section>
-
-      <section class="history-box">
-        <div class="history-top">
-          <div>
-            <h2>전체 거래 내역</h2>
-            <p>날짜, 구분, 거래처, 금액, 잔액을 확인할 수 있습니다.</p>
+          <div class="logo-area">
+            <div class="logo-icon">▤</div>
+            <span>송금시스템</span>
           </div>
+
+          <div class="profile-box">
+            <div class="profile-circle">김</div>
+            <div>
+              <strong>김민영 님</strong>
+              <p>일반 회원</p>
+            </div>
+          </div>
+
+          <nav class="menu-section">
+            <p class="menu-title">메뉴</p>
+
+            <a href="account.html" class="menu-item">
+              <span class="menu-icon">⌂</span>
+              <span>자산 현황</span>
+            </a>
+
+            <a href="transfer.html" class="menu-item">
+              <span class="menu-icon">⇄</span>
+              <span>이체</span>
+            </a>
+
+            <a href="history.html" class="menu-item active">
+              <span class="menu-icon">〰</span>
+              <span>거래 내역</span>
+            </a>
+
+            <a href="#" class="menu-item">
+              <span class="menu-icon">▣</span>
+              <span>계좌 관리</span>
+            </a>
+          </nav>
+
+          <nav class="menu-section">
+            <p class="menu-title">설정</p>
+
+            <a href="#" class="menu-item">
+              <span class="menu-icon">▣</span>
+              <span>보안 설정</span>
+            </a>
+
+            <a href="#" class="menu-item">
+              <span class="menu-icon">◎</span>
+              <span>고객 지원</span>
+            </a>
+          </nav>
         </div>
 
-        <div class="filter-area">
-          <input type="date" id="dateFilter" />
+        <button
+          class="logout-button"
+          type="button"
+          onclick="location.href = './index.html'"
+        >
+          <span>↪</span>
+          로그아웃
+        </button>
+      </aside>
 
-          <select id="typeFilter">
-            <option value="전체">전체</option>
-            <option value="입금">입금</option>
-            <option value="출금">출금</option>
-            <option value="송금">송금</option>
-          </select>
+      <section class="content-area">
+        <header class="page-header">
+          <div>
+            <h1>거래 내역</h1>
+            <p>입금, 출금, 송금 내역을 확인할 수 있어요.</p>
+          </div>
 
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="거래처 검색"
-          />
+          <div class="header-actions">
+            <button class="icon-btn" type="button">↻</button>
+            <button class="icon-btn" type="button">♧</button>
+          </div>
+        </header>
 
-          <button type="button" id="resetBtn">초기화</button>
-        </div>
+        <section class="history-summary">
+          <div class="summary-card">
+            <p>이번 달 입금</p>
+            <strong id="monthIncomeText">35,000원</strong>
+          </div>
 
-        <div class="table-wrap">
-          <table class="history-table">
-            <thead>
-              <tr>
-                <th>날짜</th>
-                <th>구분</th>
-                <th>거래처</th>
-                <th>금액</th>
-                <th>잔액</th>
-              </tr>
-            </thead>
+          <div class="summary-card">
+            <p>이번 달 출금</p>
+            <strong id="monthExpenseText">15,000원</strong>
+          </div>
 
-            <tbody id="historyBody">
-              <tr>
-                <td>2026-05-19</td>
-                <td><span class="type-badge deposit">입금</span></td>
-                <td>김지민</td>
-                <td class="plus">+20,000원</td>
-                <td>30,000원</td>
-              </tr>
+          <div class="summary-card">
+            <p>현재 잔액</p>
+            <strong id="historyBalanceText">10,000원</strong>
+          </div>
+        </section>
 
-              <tr>
-                <td>2026-05-18</td>
-                <td><span class="type-badge transfer">송금</span></td>
-                <td>박서연</td>
-                <td class="minus">-10,000원</td>
-                <td>10,000원</td>
-              </tr>
+        <section class="history-box">
+          <div class="history-top">
+            <div>
+              <h2>전체 거래 내역</h2>
+              <p>날짜, 구분, 거래처, 금액, 잔액을 확인할 수 있습니다.</p>
+            </div>
+          </div>
 
-              <tr>
-                <td>2026-05-17</td>
-                <td><span class="type-badge withdraw">출금</span></td>
-                <td>ATM 출금</td>
-                <td class="minus">-5,000원</td>
-                <td>20,000원</td>
-              </tr>
+          <div class="filter-area">
+            <input type="date" id="dateFilter" />
 
-              <tr>
-                <td>2026-05-16</td>
-                <td><span class="type-badge deposit">입금</span></td>
-                <td>이민수</td>
-                <td class="plus">+15,000원</td>
-                <td>25,000원</td>
-              </tr>
-            </tbody>
-          </table>
+            <select id="typeFilter">
+              <option value="전체">전체</option>
+              <option value="입금">입금</option>
+              <option value="출금">출금</option>
+              <option value="송금">송금</option>
+            </select>
 
-          <p class="empty-message" id="emptyMessage">
-            조건에 맞는 거래 내역이 없습니다.
-          </p>
-        </div>
+            <input type="text" id="searchInput" placeholder="거래처 검색" />
+
+            <button type="button" id="resetBtn">초기화</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>날짜</th>
+                  <th>구분</th>
+                  <th>거래처</th>
+                  <th>금액</th>
+                  <th>잔액</th>
+                </tr>
+              </thead>
+
+              <tbody id="historyBody"></tbody>
+            </table>
+
+            <p class="empty-message" id="emptyMessage">
+              조건에 맞는 거래 내역이 없습니다.
+            </p>
+          </div>
+        </section>
       </section>
-    </section>
-  </main>
+    </main>
 
-  <script>
-    const dateFilter = document.getElementById("dateFilter");
-    const typeFilter = document.getElementById("typeFilter");
-    const searchInput = document.getElementById("searchInput");
-    const resetBtn = document.getElementById("resetBtn");
-    const historyBody = document.getElementById("historyBody");
-    const emptyMessage = document.getElementById("emptyMessage");
+    <script>
+      const dateFilter = document.getElementById("dateFilter");
+      const typeFilter = document.getElementById("typeFilter");
+      const searchInput = document.getElementById("searchInput");
+      const resetBtn = document.getElementById("resetBtn");
+      const historyBody = document.getElementById("historyBody");
+      const emptyMessage = document.getElementById("emptyMessage");
 
-    const monthIncomeText = document.getElementById("monthIncomeText");
-    const monthExpenseText = document.getElementById("monthExpenseText");
-    const historyBalanceText = document.getElementById("historyBalanceText");
+      const monthIncomeText = document.getElementById("monthIncomeText");
+      const monthExpenseText = document.getElementById("monthExpenseText");
+      const historyBalanceText = document.getElementById("historyBalanceText");
 
-    function formatMoney(value) {
-      return Number(value).toLocaleString("ko-KR") + "원";
-    }
+      let histories = [];
 
-    function renderSavedHistories() {
-      const savedHistories = JSON.parse(
-        localStorage.getItem("transferHistories") || "[]"
-      );
+      // 정적 샘플 데이터
+      // 나중에 거래내역 조회 API가 생기면 이 배열은 제거 가능
+      const sampleHistories = [
+        {
+          date: "2026-05-19",
+          dateTime: "2026-05-19 10:30:00",
+          type: "입금",
+          partner: "김지민",
+          amount: 20000,
+          balance: 30000,
+          source: "sample",
+        },
+        {
+          date: "2026-05-18",
+          dateTime: "2026-05-18 14:20:00",
+          type: "송금",
+          partner: "박서연",
+          amount: 10000,
+          balance: 10000,
+          source: "sample",
+        },
+        {
+          date: "2026-05-17",
+          dateTime: "2026-05-17 09:10:00",
+          type: "출금",
+          partner: "ATM 출금",
+          amount: 5000,
+          balance: 20000,
+          source: "sample",
+        },
+        {
+          date: "2026-05-16",
+          dateTime: "2026-05-16 18:40:00",
+          type: "입금",
+          partner: "이민수",
+          amount: 15000,
+          balance: 25000,
+          source: "sample",
+        },
+      ];
 
-      if (savedHistories.length === 0) {
-        return;
+      function formatMoney(value) {
+        const numberValue = Number(value);
+
+        if (Number.isNaN(numberValue)) {
+          return "-";
+        }
+
+        return numberValue.toLocaleString("ko-KR") + "원";
       }
 
-      const savedRows = savedHistories
-        .map((item) => {
-          return `
-            <tr>
-              <td>${item.date}</td>
-              <td><span class="type-badge transfer">송금</span></td>
-              <td>${item.partner}</td>
-              <td class="minus">-${formatMoney(item.amount)}</td>
-              <td>${formatMoney(item.balance)}</td>
-            </tr>
-          `;
-        })
-        .join("");
-
-      historyBody.insertAdjacentHTML("afterbegin", savedRows);
-    }
-
-    function updateSummary() {
-      const currentBalance = Number(
-        localStorage.getItem("currentBalance") || 10000
-      );
-
-      const savedHistories = JSON.parse(
-        localStorage.getItem("transferHistories") || "[]"
-      );
-
-      const baseIncome = 35000;
-      const baseExpense = 15000;
-
-      const transferExpense = savedHistories.reduce((sum, item) => {
-        if (item.type === "송금") {
-          return sum + Number(item.amount);
+      function safeText(value) {
+        if (value === null || value === undefined || value === "") {
+          return "-";
         }
 
-        return sum;
-      }, 0);
+        return value;
+      }
 
-      monthIncomeText.textContent = formatMoney(baseIncome);
-      monthExpenseText.textContent = formatMoney(baseExpense + transferExpense);
-      historyBalanceText.textContent = formatMoney(currentBalance);
+      function getAmountClass(type) {
+        if (type === "입금") {
+          return "plus";
+        }
+
+        return "minus";
+      }
+
+      function getAmountPrefix(type) {
+        if (type === "입금") {
+          return "+";
+        }
+
+        return "-";
+      }
+
+      function getBadgeClass(type) {
+        if (type === "입금") {
+          return "deposit";
+        }
+
+        if (type === "출금") {
+          return "withdraw";
+        }
+
+        return "transfer";
+      }
+
+      function getSavedTransferHistories() {
+        try {
+          const savedHistories = JSON.parse(
+            localStorage.getItem("transferHistories") || "[]",
+          );
+
+          return savedHistories
+            .filter((item) => item.source === "transfer-api")
+            .map((item) => {
+              return {
+                date: item.date || String(item.dateTime || "").slice(0, 10),
+                dateTime: item.dateTime,
+                type: item.type || "송금",
+                partner: item.partner || item.receiver,
+                amount: Number(item.amount),
+                balance: Number(item.balance),
+                memo: item.memo || "",
+                withdrawAccount: item.withdrawAccount || "",
+                depositAccount: item.depositAccount || "",
+                transferNumber: item.transferNumber || "",
+                source: "transfer-api",
+              };
+            })
+            .filter((item) => {
+              return (
+                item.date &&
+                item.partner &&
+                !Number.isNaN(item.amount) &&
+                !Number.isNaN(item.balance)
+              );
+            });
+        } catch (error) {
+          return [];
+        }
+      }
+
+      // 나중에 실제 거래내역 조회 API가 생기면 이 함수 내부만 fetch로 교체하면 됨
+      async function fetchHistories() {
+        const savedTransferHistories = getSavedTransferHistories();
+
+        // 현재는 백엔드 API가 없으므로 샘플 데이터 + API 성공 저장 데이터 조합
+        return [...savedTransferHistories, ...sampleHistories];
+
+        /*
+    실제 API 연동 시 예시:
+
+    const response = await fetch("http://localhost:3000/api/histories");
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "거래내역을 불러오지 못했습니다.");
     }
 
-    function filterHistory() {
-      const rows = Array.from(historyBody.querySelectorAll("tr"));
+    return data.histories;
+    */
+      }
 
-      const selectedDate = dateFilter.value;
-      const selectedType = typeFilter.value;
-      const keyword = searchInput.value.trim();
+      function renderHistories(targetHistories) {
+        historyBody.innerHTML = "";
 
-      let visibleCount = 0;
-
-      rows.forEach((row) => {
-        const date = row.children[0].textContent;
-        const type = row.children[1].textContent.trim();
-        const partner = row.children[2].textContent;
-
-        const matchDate = !selectedDate || date === selectedDate;
-        const matchType = selectedType === "전체" || type === selectedType;
-        const matchKeyword = !keyword || partner.includes(keyword);
-
-        if (matchDate && matchType && matchKeyword) {
-          row.style.display = "";
-          visibleCount++;
-        } else {
-          row.style.display = "none";
+        if (targetHistories.length === 0) {
+          emptyMessage.style.display = "block";
+          return;
         }
+
+        const rows = targetHistories
+          .map((item) => {
+            const amountClass = getAmountClass(item.type);
+            const amountPrefix = getAmountPrefix(item.type);
+            const badgeClass = getBadgeClass(item.type);
+
+            return `
+          <tr>
+            <td>${safeText(item.date)}</td>
+            <td><span class="type-badge ${badgeClass}">${safeText(item.type)}</span></td>
+            <td>${safeText(item.partner)}</td>
+            <td class="${amountClass}">${amountPrefix}${formatMoney(item.amount)}</td>
+            <td>${formatMoney(item.balance)}</td>
+          </tr>
+        `;
+          })
+          .join("");
+
+        historyBody.innerHTML = rows;
+        emptyMessage.style.display = "none";
+      }
+
+      function updateSummary(targetHistories) {
+        const currentBalance = Number(
+          localStorage.getItem("currentBalance") || 10000,
+        );
+
+        const monthIncome = targetHistories.reduce((sum, item) => {
+          if (item.type === "입금") {
+            return sum + Number(item.amount);
+          }
+
+          return sum;
+        }, 0);
+
+        const monthExpense = targetHistories.reduce((sum, item) => {
+          if (item.type === "출금" || item.type === "송금") {
+            return sum + Number(item.amount);
+          }
+
+          return sum;
+        }, 0);
+
+        monthIncomeText.textContent = formatMoney(monthIncome);
+        monthExpenseText.textContent = formatMoney(monthExpense);
+        historyBalanceText.textContent = formatMoney(currentBalance);
+      }
+
+      function filterHistory() {
+        const selectedDate = dateFilter.value;
+        const selectedType = typeFilter.value;
+        const keyword = searchInput.value.trim();
+
+        const filteredHistories = histories.filter((item) => {
+          const matchDate = !selectedDate || item.date === selectedDate;
+          const matchType =
+            selectedType === "전체" || item.type === selectedType;
+          const matchKeyword = !keyword || item.partner.includes(keyword);
+
+          return matchDate && matchType && matchKeyword;
+        });
+
+        renderHistories(filteredHistories);
+      }
+
+      async function initHistoryPage() {
+        try {
+          histories = await fetchHistories();
+
+          renderHistories(histories);
+          updateSummary(histories);
+          filterHistory();
+        } catch (error) {
+          historyBody.innerHTML = "";
+          emptyMessage.textContent =
+            error.message || "거래내역을 불러오지 못했습니다.";
+          emptyMessage.style.display = "block";
+
+          monthIncomeText.textContent = "-";
+          monthExpenseText.textContent = "-";
+          historyBalanceText.textContent = "-";
+        }
+      }
+
+      dateFilter.addEventListener("change", filterHistory);
+      typeFilter.addEventListener("change", filterHistory);
+      searchInput.addEventListener("input", filterHistory);
+
+      resetBtn.addEventListener("click", () => {
+        dateFilter.value = "";
+        typeFilter.value = "전체";
+        searchInput.value = "";
+        filterHistory();
       });
 
-      emptyMessage.style.display = visibleCount === 0 ? "block" : "none";
-    }
-
-    renderSavedHistories();
-    updateSummary();
-    filterHistory();
-
-    dateFilter.addEventListener("change", filterHistory);
-    typeFilter.addEventListener("change", filterHistory);
-    searchInput.addEventListener("input", filterHistory);
-
-    resetBtn.addEventListener("click", () => {
-      dateFilter.value = "";
-      typeFilter.value = "전체";
-      searchInput.value = "";
-      filterHistory();
-    });
-  </script>
-</body>
+      initHistoryPage();
+    </script>
+  </body>
 </html>

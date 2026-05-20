@@ -286,12 +286,8 @@
           // 자산 현황 화면에서 사용할 현재 잔액 저장
           localStorage.setItem("currentBalance", afterBalance);
 
-          // 거래내역 화면에서 사용할 새 거래내역 저장
-          const savedHistories = JSON.parse(
-            localStorage.getItem("transferHistories") || "[]",
-          );
-
-          const newHistory = {
+          // 송금 API 성공 응답값 기반 거래내역 저장
+          const transferHistoryItem = {
             date: transferDateTime.slice(0, 10),
             dateTime: transferDateTime,
             type: "송금",
@@ -300,11 +296,18 @@
             balance: afterBalance,
             memo: memo,
             withdrawAccount: withdrawAccount,
+            withdrawAccountNumber: withdrawAccountNumber,
             depositAccount: depositAccount,
+            receiver: receiver,
             transferNumber: transferNumber,
+            source: "transfer-api",
           };
 
-          savedHistories.unshift(newHistory);
+          const savedHistories = JSON.parse(
+            localStorage.getItem("transferHistories") || "[]",
+          );
+
+          savedHistories.unshift(transferHistoryItem);
 
           localStorage.setItem(
             "transferHistories",
