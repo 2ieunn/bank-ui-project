@@ -10,12 +10,14 @@
   <body>
     <div class="transfer-page">
       <div class="transfer-container">
+        <!-- 송금 완료 화면 상단 영역 -->
         <div class="transfer-header">
           <h1>송금 완료</h1>
           <p>송금이 정상적으로 완료되었습니다.</p>
         </div>
 
         <div class="transfer-card">
+          <!-- 송금 완료 안내 메시지 영역 -->
           <div class="complete-message-box">
             <div class="complete-icon">✓</div>
 
@@ -23,6 +25,7 @@
             <p>요청하신 금액이 받는 사람 계좌로 정상 송금되었습니다.</p>
           </div>
 
+          <!-- 송금 완료 후 상세 정보 표시 영역 -->
           <div class="complete-info-list">
             <div class="complete-info-row">
               <span>송금 금액</span>
@@ -55,6 +58,7 @@
             </div>
           </div>
 
+          <!-- 송금 완료 후 이동 가능한 버튼 영역 -->
           <div class="complete-button-group">
             <button
               type="button"
@@ -93,12 +97,29 @@
     </div>
 
     <script>
+      // 1. 이전 화면에서 저장한 송금 정보 가져오기
+
+      // 입금 계좌번호
+      // 송금 요청 화면에서 입력한 값
       const depositAccount = localStorage.getItem("transferDepositAccount");
+
+      // 받는 사람 이름
+      // 예금주 확인 결과로 저장된 값
       const receiver = localStorage.getItem("transferReceiver");
+
+      // 송금 금액
+      // localStorage는 문자열로 저장되므로 Number로 숫자 변환
       const amount = Number(localStorage.getItem("transferAmount"));
 
+      // 송금 확인 화면에서 API 성공 후 저장한 결과값
+      // JSON 문자열 형태로 저장되어 있음
       const transferApiResultText = localStorage.getItem("transferApiResult");
 
+      // 2. 공통 함수
+
+      // 숫자를 한국 원화 형식으로 변환하는 함수
+      // 예: 10000 → 10,000원
+      // 숫자로 변환할 수 없는 값이면 "-" 표시
       function formatMoney(value) {
         const numberValue = Number(value);
 
@@ -109,6 +130,8 @@
         return numberValue.toLocaleString("ko-KR") + "원";
       }
 
+      // 화면에 표시할 텍스트를 안전하게 처리하는 함수
+      // null, undefined, 빈 문자열이면 "-"로 표시해서 화면 깨짐 방지
       function safeText(value) {
         if (value === null || value === undefined || value === "") {
           return "-";
@@ -117,6 +140,10 @@
         return value;
       }
 
+      // 3. API 결과값 파싱 함수
+
+      // localStorage에 저장된 transferApiResult 값을 객체로 변환
+      // 저장값이 없거나 JSON 형식이 잘못되면 null 반환
       function getTransferApiResult() {
         if (!transferApiResultText) {
           return null;
@@ -129,19 +156,24 @@
         }
       }
 
+      // 송금 API 성공 결과가 화면 표시 가능한 정상 데이터인지 확인
+      // 완료 화면은 API 성공 응답값이 정상일 때만 보여줌
       function isValidTransferResult(result) {
         if (!result) {
           return false;
         }
 
+        // 거래 일시 필수 검증
         if (!result.transferDateTime) {
           return false;
         }
 
+        // 거래번호 필수 검증
         if (!result.transferNumber) {
           return false;
         }
 
+        // 송금 후 잔액이 숫자로 변환 가능한지 검증
         if (Number.isNaN(Number(result.afterBalance))) {
           return false;
         }
@@ -149,8 +181,13 @@
         return true;
       }
 
+      // 4. 송금 완료 정보 검증
+
+      // API 성공 결과값 파싱
       const transferApiResult = getTransferApiResult();
 
+      // 완료 화면에 필요한 필수 데이터가 없으면 송금 화면으로 되돌림
+      // 실패한 송금이나 잘못된 접근으로 완료 화면이 표시되는 것을 방지
       if (
         !depositAccount ||
         !receiver ||
@@ -159,26 +196,38 @@
       ) {
         alert("송금 완료 정보가 올바르지 않습니다. 송금 화면으로 이동합니다.");
         location.href = "./transfer.html";
-      } else {
+      }
+
+      // 필수 데이터가 모두 정상인 경우 완료 화면에 송금 결과 표시
+      else {
+        // 백엔드 송금 API 성공 응답값에서 거래 일시, 거래번호, 잔액 추출
         const transferDateTime = transferApiResult.transferDateTime;
         const transferNumber = transferApiResult.transferNumber;
         const afterBalance = Number(transferApiResult.afterBalance);
 
+        // 송금 금액 표시
         document.getElementById("completeAmount").textContent =
           formatMoney(amount);
 
+        // 받는 사람 표시
         document.getElementById("completeReceiver").textContent =
           safeText(receiver);
 
+        // 받는 계좌 표시
         document.getElementById("completeDepositAccount").textContent =
           safeText(depositAccount);
 
+        // 거래 일시 표시
+        // 실제 백엔드 연동 시에는 서버에서 내려준 처리 완료 시간을 사용
         document.getElementById("completeDateTime").textContent =
           safeText(transferDateTime);
 
+        // 거래번호 표시
+        // 실제 백엔드 연동 시에는 서버에서 내려준 거래번호를 사용
         document.getElementById("completeTransferNumber").textContent =
           safeText(transferNumber);
 
+        // 송금 후 잔액 표시
         document.getElementById("completeAfterBalance").textContent =
           formatMoney(afterBalance);
       }

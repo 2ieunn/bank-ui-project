@@ -10,17 +10,20 @@
   <body>
     <div class="transfer-page">
       <div class="transfer-container">
+        <!-- 송금 확인 화면 상단 영역 -->
         <div class="transfer-header">
           <h1>송금 확인</h1>
           <p>입력한 송금 정보를 확인한 뒤 최종 송금을 진행해주세요.</p>
         </div>
 
         <div class="transfer-card">
+          <!-- 사용자가 최종 송금 전 확인해야 하는 안내 영역 -->
           <div class="confirm-title-box">
             <span>확인 필요</span>
             <strong>아래 정보가 맞는지 확인해주세요.</strong>
           </div>
 
+          <!-- 송금 요청 화면에서 입력한 정보가 표시되는 영역 -->
           <div class="confirm-info-list">
             <div class="confirm-info-row">
               <span>받는 계좌</span>
@@ -62,6 +65,7 @@
             확인 후 송금 버튼을 누르면 송금 완료 화면으로 이동합니다.
           </p>
 
+          <!-- 수정 버튼 / 최종 송금 버튼 영역 -->
           <div class="confirm-button-group">
             <button
               type="button"
@@ -84,41 +88,81 @@
     </div>
 
     <script>
+      // 1. 송금 요청 화면에서 저장한 데이터 가져오기
+
+      // 출금 계좌 표시명
+      // 예: 주 계좌 110-123-456789
       const withdrawAccount = localStorage.getItem("transferWithdrawAccount");
+
+      // 실제 출금 계좌번호
+      // 백엔드 송금 요청 시 사용할 수 있는 값
       const withdrawAccountNumber = localStorage.getItem(
         "transferWithdrawAccountNumber",
       );
+
+      // 입금 계좌번호
       const depositAccount = localStorage.getItem("transferDepositAccount");
+
+      // 예금주 확인을 통해 가져온 받는 사람 이름
       const receiver = localStorage.getItem("transferReceiver");
+
+      // 송금 금액
       const amount = Number(localStorage.getItem("transferAmount"));
+
+      // 송금 수수료
+      // 값이 없으면 기본값 0원으로 처리
       const fee = Number(localStorage.getItem("transferFee") || 0);
+
+      // 메모
+      // 입력값이 없으면 화면에는 '없음'으로 표시
       const memo = localStorage.getItem("transferMemo") || "없음";
 
+      // 현재 잔액
+      // 백엔드 연동 전에는 localStorage 기준으로 잔액을 관리
+      // 값이 없으면 기본값 10,000원으로 설정
       const currentBalance = Number(
         localStorage.getItem("currentBalance") || 10000,
       );
 
+      // 송금 후 예상 잔액 계산
+      // 현재 잔액 - 송금 금액 - 수수료
       const expectedAfterBalance = currentBalance - amount - fee;
 
+      // 최종 송금 버튼 요소 가져오기
       const finalTransferBtn = document.getElementById("finalTransferBtn");
 
+      // 2. 공통 함수
+
+      // 숫자를 한국 원화 형식으로 변환
+      // 예: 10000 → 10,000원
       function formatMoney(value) {
         return Number(value).toLocaleString("ko-KR") + "원";
       }
 
+      // 거래번호 생성 함수
+      // 현재는 프론트에서 임시 생성
+      // 실제 백엔드 연동 시에는 백엔드 응답값으로 받은 거래번호를 사용하는 것이 적절함
       function createTransferNumber() {
         const now = new Date();
 
+        // 날짜 부분 생성
+        // 예: 20260526
         const datePart =
           now.getFullYear().toString() +
           String(now.getMonth() + 1).padStart(2, "0") +
           String(now.getDate()).padStart(2, "0");
 
+        // 6자리 숫자 랜덤 생성
         const randomPart = Math.floor(Math.random() * 900000 + 100000);
 
+        // 최종 거래번호 형식
+        // 예: TR-20260526-123456
         return "TR-" + datePart + "-" + randomPart;
       }
 
+      // 거래 일시 생성 함수
+      // 현재는 프론트에서 현재 시간을 기준으로 생성
+      // 실제 백엔드 연동 시에는 백엔드에서 처리 완료 시간을 내려주는 방식 사용
       function createDateTime() {
         const now = new Date();
 
@@ -129,12 +173,16 @@
         const minute = String(now.getMinutes()).padStart(2, "0");
         const second = String(now.getSeconds()).padStart(2, "0");
 
+        // 예: 2026-05-26 14:30:15
         return `${year}-${month}-${date} ${hour}:${minute}:${second}`;
       }
 
+      // 송금 API 실패 시 화면에 에러 메시지를 표시하는 함수
       function showTransferError(message) {
+        // 기존에 생성된 에러 메시지 영역이 있는지 확인
         let errorText = document.getElementById("transferApiError");
 
+        // 에러 메시지 영역이 없으면 새로 생성
         if (!errorText) {
           errorText = document.createElement("p");
           errorText.id = "transferApiError";
@@ -143,15 +191,18 @@
           errorText.style.textAlign = "center";
           errorText.style.color = "#dc2626";
 
+          // 버튼 영역 위에 에러 메시지를 삽입
           finalTransferBtn.parentElement.insertAdjacentElement(
             "beforebegin",
             errorText,
           );
         }
 
+        // 에러 메시지 출력
         errorText.textContent = message;
       }
 
+      // 기존 송금 에러 메시지를 초기화하는 함수
       function clearTransferError() {
         const errorText = document.getElementById("transferApiError");
 
@@ -159,6 +210,9 @@
           errorText.textContent = "";
         }
       }
+
+      // 백엔드 또는 mock API에서 전달된 에러 코드를 사용자용 문구로 변환
+      // 실제 API 연동 시에도 백엔드 에러 코드를 기준으로 안내 문구를 분기할 수 있음
       function getTransferErrorMessage(error) {
         if (!error) {
           return "송금 처리 중 알 수 없는 오류가 발생했습니다.";
@@ -192,18 +246,27 @@
           return "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
         }
 
+        // 정의되지 않은 에러 코드는 백엔드 message가 있으면 그대로 표시
         return error.message || "송금 처리 중 오류가 발생했습니다.";
       }
+
+      // 3. 송금 처리 mock API 함수
 
       // 실제 백엔드 API가 없으므로 mock API로 송금 처리
       // 나중에 백엔드가 생기면 이 함수만 fetch 코드로 교체하면 됨
       function requestTransferApi(requestBody) {
         return new Promise((resolve, reject) => {
+          // 실제 API처럼 보이도록 0.8초 지연 처리
           setTimeout(() => {
+            // 현재 잔액 다시 조회
+            // 송금 처리 직전에 잔액을 다시 확인하기 위한 용도
             const currentBalance = Number(
               localStorage.getItem("currentBalance") || 10000,
             );
 
+            // 송금 가능한 입금 계좌 목록
+            // 현재는 mock 검증용 데이터
+            // 실제 백엔드에서는 서버 DB 기준으로 검증
             const validDepositAccounts = [
               "333-456-789000",
               "222-111-123456",
@@ -211,10 +274,11 @@
               "999-888-777666",
             ];
 
+            // 송금 후 잔액 계산
             const afterBalance =
               currentBalance - requestBody.amount - requestBody.fee;
 
-            // 계좌번호 오류
+            // 입금 계좌 정보 누락 검증
             if (!requestBody.depositAccount) {
               reject({
                 code: "INVALID_ACCOUNT",
@@ -223,6 +287,7 @@
               return;
             }
 
+            // 존재하지 않는 입금 계좌 검증
             if (!validDepositAccounts.includes(requestBody.depositAccount)) {
               reject({
                 code: "INVALID_ACCOUNT",
@@ -231,7 +296,7 @@
               return;
             }
 
-            // 출금 계좌 오류
+            // 출금 계좌 정보 누락 검증
             if (!requestBody.withdrawAccount) {
               reject({
                 code: "INVALID_WITHDRAW_ACCOUNT",
@@ -240,7 +305,7 @@
               return;
             }
 
-            // 예금주 오류
+            // 예금주 정보 누락 검증
             if (!requestBody.receiver) {
               reject({
                 code: "INVALID_RECEIVER",
@@ -249,7 +314,7 @@
               return;
             }
 
-            // 금액 오류
+            // 송금 금액 검증
             if (!requestBody.amount || requestBody.amount <= 0) {
               reject({
                 code: "INVALID_AMOUNT",
@@ -258,7 +323,7 @@
               return;
             }
 
-            // 잔액 부족
+            // 잔액 부족 검증
             if (afterBalance < 0) {
               reject({
                 code: "INSUFFICIENT_BALANCE",
@@ -277,6 +342,8 @@
               return;
             }
 
+            // 송금 성공 응답
+            // 실제 API 연동 시에는 백엔드에서 이 값을 내려줘야 함
             resolve({
               transferDateTime: createDateTime(),
               transferNumber: createTransferNumber(),
@@ -286,13 +353,22 @@
         });
       }
 
+      // 4. 화면 진입 시 송금 정보 검증 및 표시
+
+      // 송금 요청 화면에서 넘어온 필수 정보가 없으면 송금 화면으로 되돌림
       if (!withdrawAccount || !depositAccount || !receiver || !amount) {
         alert("송금 정보가 없습니다. 송금 화면으로 이동합니다.");
         location.href = "./transfer.html";
-      } else if (expectedAfterBalance < 0) {
+      }
+
+      // 예상 잔액이 음수라면 잔액 부족으로 송금 화면으로 되돌림
+      else if (expectedAfterBalance < 0) {
         alert("잔액이 부족합니다. 송금 화면으로 이동합니다.");
         location.href = "./transfer.html";
-      } else {
+      }
+
+      // 송금 정보가 정상적으로 존재하면 화면에 값 표시
+      else {
         document.getElementById("confirmDepositAccount").textContent =
           depositAccount;
 
@@ -312,29 +388,53 @@
           formatMoney(expectedAfterBalance);
       }
 
+      // 5. 최종 송금 버튼 클릭 처리
+
       finalTransferBtn.addEventListener("click", async () => {
+        // 기존 에러 메시지 초기화
         clearTransferError();
 
+        // 중복 클릭 방지를 위해 버튼 비활성화
         finalTransferBtn.disabled = true;
         finalTransferBtn.textContent = "송금 처리 중...";
 
+        // 백엔드 송금 API로 전달할 요청 데이터
         const requestBody = {
+          // 실제 출금 계좌번호
           withdrawAccount: withdrawAccountNumber,
+
+          // 화면 표시용 출금 계좌명
           withdrawAccountName: withdrawAccount,
+
+          // 입금 계좌번호
           depositAccount: depositAccount,
+
+          // 예금주명
           receiver: receiver,
+
+          // 송금 금액
           amount: amount,
+
+          // 송금 수수료
           fee: fee,
+
+          // 메모
           memo: memo,
         };
 
         try {
+          // 송금 API 요청
+          // 현재는 mock API 함수 호출
+          // 실제 백엔드 연동 시 requestTransferApi 내부를 fetch로 교체
           const result = await requestTransferApi(requestBody);
 
+          // API 성공 응답값 꺼내기
           const transferDateTime = result.transferDateTime;
           const transferNumber = result.transferNumber;
           const afterBalance = Number(result.afterBalance);
 
+          // 응답값 검증
+          // 필수 응답값이 없거나 잔액이 숫자가 아니면 실패 처리
           if (
             !transferDateTime ||
             !transferNumber ||
@@ -343,58 +443,97 @@
             throw new Error("송금 응답값이 올바르지 않습니다.");
           }
 
-          // API 성공 응답값 기준으로 완료 화면에서 사용할 값 저장
+          // 6. API 성공 시 완료 화면에서 사용할 데이터 저장
+
+          // 완료 화면에서 사용할 API 응답 결과
           const transferApiResult = {
             transferDateTime: transferDateTime,
             transferNumber: transferNumber,
             afterBalance: afterBalance,
           };
 
+          // API 성공 결과를 localStorage에 저장
           localStorage.setItem(
             "transferApiResult",
             JSON.stringify(transferApiResult),
           );
 
           // 기존 화면/기능 호환용 저장
+          // transfer-complete.html에서 개별 값을 사용할 수 있도록 저장
           localStorage.setItem("transferAfterBalance", afterBalance);
           localStorage.setItem("transferDateTime", transferDateTime);
           localStorage.setItem("transferNumber", transferNumber);
 
           // 자산 현황 화면에서 사용할 현재 잔액 저장
+          // 송금 성공 후에만 잔액을 변경해야 함
           localStorage.setItem("currentBalance", afterBalance);
 
+          // 7. 거래내역 저장
+
           // 송금 API 성공 응답값 기반 거래내역 저장
+          // 실패 시에는 이 데이터가 저장되지 않음
           const transferHistoryItem = {
+            // 거래 날짜
             date: transferDateTime.slice(0, 10),
+
+            // 거래 일시
             dateTime: transferDateTime,
+
+            // 거래 유형
             type: "송금",
+
+            // 거래 상대
             partner: receiver,
+
+            // 송금 금액
             amount: amount,
+
+            // 송금 후 잔액
             balance: afterBalance,
+
+            //메모
             memo: memo,
+
+            // 출금 계좌 표시명
             withdrawAccount: withdrawAccount,
+
+            // 출금 계좌번호
             withdrawAccountNumber: withdrawAccountNumber,
+
+            // 입금 계좌번호
             depositAccount: depositAccount,
+
+            // 예금주명
             receiver: receiver,
+
+            // 거래번호
             transferNumber: transferNumber,
+
+            // 데이터 출처 표시
             source: "transfer-api",
           };
 
+          // 기존 거래내역 불러오기
           const savedHistories = JSON.parse(
             localStorage.getItem("transferHistories") || "[]",
           );
 
+          // 최신 거래내역을 배열 맨 앞에 추가
           savedHistories.unshift(transferHistoryItem);
 
+          // 거래내역 다시 저장
           localStorage.setItem(
             "transferHistories",
             JSON.stringify(savedHistories),
           );
 
+          // 송금 완료 화면으로 이동
           location.href = "./transfer-complete.html";
         } catch (error) {
+          // 송금 실패 시 사용자에게 에러 메시지 표시
           showTransferError(getTransferErrorMessage(error));
 
+          // 실패했으므로 다시 송금 버튼을 누를 수 있도록 복구
           finalTransferBtn.disabled = false;
           finalTransferBtn.textContent = "확인 후 송금";
         }

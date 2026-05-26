@@ -9,13 +9,16 @@
 
   <body>
     <main class="dashboard-page">
+      <!-- 왼쪽 사이드바 영역 -->
       <aside class="sidebar">
         <div>
+          <!-- 서비스 로고 영역 -->
           <div class="logo-area">
             <div class="logo-icon">▤</div>
             <span>송금시스템</span>
           </div>
 
+          <!-- 사용자 프로필 영역 -->
           <div class="profile-box">
             <div class="profile-circle">김</div>
             <div>
@@ -24,30 +27,36 @@
             </div>
           </div>
 
+          <!-- 주요 메뉴 영역 -->
           <nav class="menu-section">
             <p class="menu-title">메뉴</p>
 
+            <!-- 현재 페이지: 자산 현황 -->
             <a href="./account.html" class="menu-item active">
               <span class="menu-icon">⌂</span>
               <span>자산 현황</span>
             </a>
 
+            <!-- 이체 화면으로 이동 -->
             <a href="./transfer.html" class="menu-item">
               <span>⇄</span>
               <span>이체</span>
             </a>
 
+            <!-- 거래 내역 화면으로 이동 -->
             <a href="history.html" class="menu-item">
               <span class="menu-icon">〰</span>
               <span>거래 내역</span>
             </a>
 
+            <!-- 계좌 관리 메뉴: 현재는 연결 화면 없음 -->
             <a href="#" class="menu-item">
               <span class="menu-icon">▣</span>
               <span>계좌 관리</span>
             </a>
           </nav>
 
+          <!-- 설정 메뉴 영역 -->
           <nav class="menu-section setting-section">
             <p class="menu-title">설정</p>
 
@@ -63,6 +72,7 @@
           </nav>
         </div>
 
+        <!-- 로그아웃 버튼 -->
         <button
           class="logout-button"
           type="button"
@@ -73,32 +83,39 @@
         </button>
       </aside>
 
+      <!-- 오른쪽 메인 콘텐츠 영역 -->
       <section class="dashboard-content">
+        <!-- 상단 인사말 영역 -->
         <header class="dashboard-header">
           <div>
             <h1>안녕하세요, 김민영님</h1>
             <p>내 자산을 안전하게 관리하고 있어요. · 오늘 기준 잔액</p>
           </div>
 
+          <!-- 새로고침, 알림 등으로 사용할 수 있는 버튼 영역 -->
           <div class="header-buttons">
             <button type="button">↻</button>
             <button type="button">♧</button>
           </div>
         </header>
 
+        <!-- 자산 요약 카드 영역 -->
         <section class="summary-grid">
+          <!-- 총 자산 카드 -->
           <article class="summary-card main-balance">
             <p>총 자산</p>
             <strong id="totalAssetText">10,000원</strong>
             <span>⟳ 보안 연결됨</span>
           </article>
 
+          <!-- 이번 달 수입 카드 -->
           <article class="summary-card">
             <p>이번 달 수입</p>
             <strong id="monthIncomeText">0원</strong>
             <span>내역 없음</span>
           </article>
 
+          <!-- 이번 달 지출 카드 -->
           <article class="summary-card">
             <p>이번 달 지출</p>
             <strong id="monthExpenseText">0원</strong>
@@ -107,12 +124,14 @@
         </section>
 
         <section class="main-grid">
+          <!-- 연결된 계좌 정보 영역 -->
           <article class="panel account-panel">
             <div class="panel-title-row">
               <h2>연결된 계좌</h2>
               <a href="#">전체 보기</a>
             </div>
 
+            <!-- 대표 계좌 정보 -->
             <div class="account-box">
               <div class="account-icon">▣</div>
 
@@ -121,11 +140,13 @@
                 <span>100-1234-5678</span>
               </div>
 
+              <!-- 대표 계좌 잔액 표시 -->
               <strong id="accountBalanceText">10,000원</strong>
             </div>
 
             <div class="account-divider"></div>
 
+            <!-- 계좌 추가 UI -->
             <div class="add-account">
               <div>＋</div>
               <section>
@@ -137,10 +158,12 @@
             <button class="down-button" type="button">↓</button>
           </article>
 
+          <!-- 빠른 메뉴 영역 -->
           <article class="panel quick-panel">
             <h2>빠른 메뉴</h2>
 
             <div class="quick-grid">
+              <!-- 이체 화면 이동 -->
               <button type="button" onclick="location.href = './transfer.html'">
                 <span>⇄</span>
                 <section>
@@ -149,6 +172,7 @@
                 </section>
               </button>
 
+              <!-- 거래 내역 화면 이동 -->
               <button type="button" onclick="location.href = './history.html'">
                 <span>▥</span>
                 <section>
@@ -176,6 +200,7 @@
           </article>
         </section>
 
+        <!-- 공지 영역: 현재는 표시 문구 없음 -->
         <div class="notice-box">
           <span></span>
           <p></p>
@@ -184,37 +209,75 @@
     </main>
 
     <script>
+      // ================================
+      // 1. 공통 함수
+      // ================================
+
+      // 숫자를 한국 원화 형식으로 변환
+      // 예: 10000 → 10,000원
       function formatMoney(value) {
         return Number(value).toLocaleString("ko-KR") + "원";
       }
 
+      // ================================
+      // 2. 자산 현황 데이터 가져오기
+      // ================================
+
+      // 현재 잔액
+      // 현재는 백엔드 API가 없기 때문에 localStorage에 저장된 currentBalance 값을 사용
+      // 송금이 성공하면 transfer-confirm.html에서 currentBalance를 송금 후 잔액으로 업데이트함
+      // 값이 없으면 기본값 10,000원으로 표시
       const currentBalance = Number(
-        localStorage.getItem("currentBalance") || 10000
+        localStorage.getItem("currentBalance") || 10000,
       );
 
+      // 거래내역 데이터
+      // 현재는 송금 성공 시 localStorage의 transferHistories 배열에 거래내역이 저장됨
+      // 실제 백엔드 연동 시에는 GET /api/transactions 또는 GET /api/accounts/summary 같은 API로 대체 가능
       const transferHistories = JSON.parse(
-        localStorage.getItem("transferHistories") || "[]"
+        localStorage.getItem("transferHistories") || "[]",
       );
 
+      // ================================
+      // 3. 이번 달 지출 계산
+      // ================================
+
+      // 거래내역 중 type이 "송금"인 항목만 지출로 계산
+      // 현재 구조에서는 송금 거래만 저장하고 있으므로 송금 금액의 합계를 이번 달 지출로 표시함
+      //
+      // 실제 백엔드 연동 시에는 서버에서 월별 수입/지출 합계를 계산해서 내려주거나,
+      // 거래내역 API 응답값을 기준으로 프론트에서 필터링할 수 있음
       const totalTransferExpense = transferHistories.reduce((sum, item) => {
+        // 거래 유형이 송금이면 지출 합계에 금액을 더함
         if (item.type === "송금") {
           return sum + Number(item.amount);
         }
 
+        // 송금이 아닌 거래는 현재 지출 합계에서 제외
         return sum;
       }, 0);
 
+      // ================================
+      // 4. 화면에 데이터 표시
+      // ================================
+
+      // 총 자산 표시
+      // 현재는 계좌가 1개라고 가정하고 currentBalance를 총 자산으로 표시
       document.getElementById("totalAssetText").textContent =
         formatMoney(currentBalance);
 
+      // 대표 계좌 잔액 표시
       document.getElementById("accountBalanceText").textContent =
         formatMoney(currentBalance);
 
+      // 이번 달 지출 표시
       document.getElementById("monthExpenseText").textContent =
         formatMoney(totalTransferExpense);
 
+      // 지출 내역 존재 여부에 따라 상태 문구 변경
       if (totalTransferExpense > 0) {
-        document.getElementById("expenseStatusText").textContent = "송금 내역 있음";
+        document.getElementById("expenseStatusText").textContent =
+          "송금 내역 있음";
       } else {
         document.getElementById("expenseStatusText").textContent = "내역 없음";
       }
