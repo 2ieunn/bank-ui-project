@@ -1,0 +1,1441 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic",
+    sans-serif;
+  background: #f4f7fb;
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* =========================
+   로그인 화면: index.html
+========================= */
+.page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f7fb;
+}
+
+.login-card {
+  width: 526px;
+  min-height: 624px;
+  background: #ffffff;
+  border: 1px solid #e1e7ef;
+  border-radius: 22px;
+  padding: 56px 46px 42px;
+}
+
+.login-header h1 {
+  font-size: 31px;
+  font-weight: 500;
+  letter-spacing: -1.2px;
+  color: #111827;
+  line-height: 1.25;
+}
+
+.login-header p {
+  margin-top: 9px;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  color: #7b8494;
+}
+
+.login-form {
+  margin-top: 40px;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  color: #111827;
+}
+
+.form-group input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #cfd4dc;
+  border-radius: 7px;
+  padding: 0 14px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #111827;
+  outline: none;
+  background: #ffffff;
+}
+
+.form-group input::placeholder {
+  color: #a8b0bc;
+  font-weight: 400;
+}
+
+.form-group input:focus {
+  border-color: #7f8de8;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -2px;
+}
+
+.save-id {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #424957;
+  letter-spacing: -0.4px;
+  cursor: pointer;
+}
+
+.save-id input {
+  width: 20px;
+  height: 20px;
+  accent-color: #7d88dd;
+  cursor: pointer;
+}
+
+.find-password {
+  font-size: 16px;
+  font-weight: 400;
+  color: #717ee6;
+  letter-spacing: -0.4px;
+}
+
+.login-button {
+  width: 100%;
+  height: 56px;
+  margin-top: 31px;
+  border: 1px solid #bfc3ca;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: #f9fafb;
+}
+
+.security-text {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #98a2b3;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: #edf0f4;
+  margin-top: 31px;
+}
+
+.bottom-links {
+  margin-top: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #7f8797;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+}
+
+.bottom-links a {
+  color: #7f8797;
+}
+
+.bottom-links span {
+  width: 1px;
+  height: 14px;
+  background: #d8dde5;
+}
+
+.bottom-links p {
+  color: #7f8797;
+}
+
+.bottom-links .join-link {
+  color: #717ee6;
+  font-weight: 500;
+}
+
+/* =========================
+   공통 레이아웃: account.html / history.html
+========================= */
+.dashboard-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  background: #f8f9f7;
+}
+
+.sidebar {
+  width: 340px;
+  min-width: 340px;
+  min-height: 100vh;
+  flex-shrink: 0;
+  background: #ffffff;
+  border-right: 1px solid #dfe3e8;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logo-area {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 48px;
+  border-bottom: 1px solid #e6e8eb;
+  color: #111827;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.logo-icon {
+  color: #4466a6;
+  font-size: 22px;
+}
+
+.profile-box {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 26px 46px 28px;
+}
+
+.profile-circle {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #edf4fb;
+  color: #4164a8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.profile-box strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.profile-box p {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #5b6472;
+}
+
+.menu-section {
+  width: 100%;
+  padding-top: 6px;
+}
+
+.setting-section {
+  margin-top: 28px;
+}
+
+.menu-title {
+  padding: 0 46px;
+  margin-bottom: 7px;
+  color: #555c68;
+  font-size: 14px;
+}
+
+.menu-item {
+  width: 100%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 52px;
+  color: #1f2937;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.menu-item > span:first-child {
+  width: 22px;
+  min-width: 22px;
+  text-align: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  color: #5367aa;
+}
+
+.menu-item > span:last-child {
+  width: auto;
+  white-space: nowrap;
+}
+
+.menu-icon {
+  width: 22px;
+  min-width: 22px;
+  text-align: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  color: #5367aa;
+}
+
+.menu-item.active {
+  background: #eef2f8;
+  color: #5367aa;
+  border-left: 3px solid #5367aa;
+  padding-left: 49px;
+}
+
+.logout-button,
+.logout-btn {
+  height: 48px;
+  margin: 0 0 18px 46px;
+  border: none;
+  background: transparent;
+  color: #333b49;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+/* =========================
+   자산 현황 화면: account.html
+========================= */
+.dashboard-content {
+  flex: 1;
+  padding: 31px 54px 0 19px;
+  overflow: hidden;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.dashboard-header h1 {
+  font-size: 29px;
+  font-weight: 500;
+  letter-spacing: -0.8px;
+  color: #111827;
+}
+
+.dashboard-header p {
+  margin-top: 6px;
+  font-size: 16px;
+  color: #5f6673;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.header-buttons button {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  border: 1px solid #d7dbe1;
+  background: #ffffff;
+  font-size: 21px;
+  color: #333;
+  cursor: pointer;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: 172px 172px 172px;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.summary-grid .summary-card {
+  height: 159px;
+  background: #ffffff;
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+  padding: 26px;
+}
+
+.summary-grid .summary-card p {
+  font-size: 15px;
+  color: #555b67;
+  margin: 0;
+}
+
+.summary-grid .summary-card strong {
+  display: block;
+  margin-top: 17px;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: #222;
+}
+
+.summary-grid .summary-card span {
+  display: inline-flex;
+  margin-top: 18px;
+  padding: 5px 12px;
+  border-radius: 18px;
+  background: #f0efec;
+  font-size: 14px;
+  color: #6b6f78;
+}
+
+.summary-grid .main-balance {
+  background: #4164a6;
+  color: #ffffff;
+  border: none;
+}
+
+.summary-grid .main-balance p,
+.summary-grid .main-balance strong {
+  color: #ffffff;
+}
+
+.summary-grid .main-balance span {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 239px 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+}
+
+.account-panel {
+  height: 363px;
+  padding: 27px 25px 18px;
+  position: relative;
+}
+
+.panel-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel h2 {
+  font-size: 18px;
+  font-weight: 500;
+  color: #222;
+}
+
+.panel-title-row a {
+  color: #4164a6;
+  font-size: 15px;
+}
+
+.account-box {
+  display: flex;
+  align-items: center;
+  margin-top: 42px;
+}
+
+.account-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #edf4fb;
+  color: #4164a6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+.account-info p {
+  font-size: 15px;
+  color: #333;
+}
+
+.account-info span {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 1.35;
+  color: #333;
+}
+
+.account-box strong {
+  margin-left: auto;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.small-transfer-btn {
+  position: absolute;
+  right: 25px;
+  top: 120px;
+  width: 111px;
+  height: 70px;
+  border-radius: 8px;
+  border: 1px solid #b7b7b7;
+  background: #ffffff;
+  font-size: 16px;
+  color: #222;
+  cursor: pointer;
+}
+
+.account-divider {
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
+  margin-top: 50px;
+}
+
+.add-account {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 18px;
+}
+
+.add-account > div {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #f5f8fc;
+  color: #9aacc8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.add-account p {
+  font-size: 16px;
+  color: #868b96;
+}
+
+.add-account span {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #b0b5bd;
+}
+
+.down-button {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.quick-panel {
+  height: 274px;
+  padding: 28px 24px;
+}
+
+.quick-grid {
+  display: grid;
+  grid-template-columns: 169px 169px;
+  gap: 11px;
+  margin-top: 24px;
+}
+
+.quick-grid button {
+  height: 74px;
+  border: 1px solid #dcdfe4;
+  border-radius: 8px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 0 18px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.quick-grid button span {
+  color: #4164a6;
+  font-size: 24px;
+}
+
+.quick-grid strong {
+  font-size: 16px;
+  font-weight: 500;
+  color: #222;
+}
+
+.quick-grid p {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #555b67;
+}
+
+.notice-box {
+  width: 100%;
+  height: 73px;
+  margin-top: 16px;
+  background: #edf4fb;
+  border: 1px solid #dbe6f5;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 20px;
+  color: #4164a6;
+  font-size: 15px;
+}
+
+/* =========================
+   송금 요청 화면: transfer.html
+========================= */
+.transfer-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f4f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.transfer-container {
+  width: 470px;
+  margin-top: 36px;
+}
+
+.transfer-header {
+  margin-bottom: 18px;
+}
+
+.transfer-header h1 {
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+  color: #111827;
+  line-height: 1.25;
+}
+
+.transfer-header p {
+  margin-top: 7px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  color: #7b8494;
+}
+
+.transfer-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e1e7ef;
+  border-radius: 14px;
+  padding: 27px 24px 25px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+}
+
+.transfer-balance-box {
+  width: 100%;
+  height: 62px;
+  background: #f9fafb;
+  border-radius: 9px;
+  padding: 0 17px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.transfer-balance-box span {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+}
+
+.transfer-balance-box strong {
+  font-size: 14px;
+  color: #111827;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.transfer-form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  letter-spacing: -0.3px;
+  margin-bottom: 9px;
+}
+
+.transfer-form input {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #cfd4dc;
+  border-radius: 7px;
+  padding: 0 14px;
+  font-size: 15px;
+  outline: none;
+  color: #111827;
+  background: #ffffff;
+}
+
+.transfer-form input::placeholder {
+  color: #a8b0bc;
+}
+
+.transfer-form input:focus {
+  border-color: #7f8de8;
+}
+
+.transfer-info-text {
+  width: 100%;
+  min-height: 39px;
+  background: #eff6ff;
+  border-radius: 7px;
+  color: #4169e1;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  margin-top: 16px;
+  margin-bottom: 18px;
+}
+
+.transfer-submit-btn {
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 7px;
+  background: #4f63df;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  cursor: pointer;
+}
+
+.transfer-submit-btn:hover {
+  background: #4356c7;
+}
+
+.transfer-select {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #cfd4dc;
+  border-radius: 7px;
+  padding: 0 14px;
+  margin-bottom: 24px;
+  font-size: 16px;
+  color: #111827;
+  background-color: #ffffff;
+  outline: none;
+}
+
+.transfer-select:focus {
+  border-color: #7f8de8;
+}
+
+.receiver-check-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+  background-color: #f8fafc;
+}
+
+.receiver-check-box span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #7b8494;
+}
+
+.receiver-check-box strong {
+  font-size: 17px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.receiver-check-btn {
+  min-width: 72px;
+  height: 38px;
+  border: 1px solid #bfc3ca;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.receiver-check-btn:hover {
+  background-color: #f9fafb;
+}
+
+.transfer-summary-box {
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+  background-color: #edf4fb;
+}
+
+.transfer-summary-box div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.transfer-summary-box div + div {
+  margin-top: 12px;
+}
+
+.transfer-summary-box span {
+  font-size: 14px;
+  color: #555b67;
+}
+
+.transfer-summary-box strong {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* =========================
+   잔액 조회 화면: balance.html
+========================= */
+.balance-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f4f7fb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.balance-container {
+  width: 470px;
+  margin-top: 16px;
+}
+
+.balance-header {
+  margin-bottom: 18px;
+}
+
+.balance-header h1 {
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: -0.8px;
+  color: #111827;
+  line-height: 1.25;
+}
+
+.balance-header p {
+  margin-top: 7px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.3px;
+  color: #7b8494;
+}
+
+.balance-card {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e1e7ef;
+  border-radius: 14px;
+  padding: 28px 24px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+}
+
+.balance-section {
+  padding: 0 0 20px;
+}
+
+.balance-section p {
+  font-size: 13px;
+  font-weight: 500;
+  color: #6b7280;
+  letter-spacing: -0.3px;
+  margin-bottom: 7px;
+}
+
+.balance-section strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.3px;
+}
+
+.current-balance strong {
+  font-size: 28px;
+  color: #4f63df;
+  letter-spacing: -1px;
+}
+
+.balance-line {
+  width: 100%;
+  height: 1px;
+  background: #e5e7eb;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   송금 확인 화면: transfer-confirm.html
+========================= */
+.confirm-title-box {
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  border: 1px solid #dbe6f5;
+  border-radius: 10px;
+  background: #edf4fb;
+}
+
+.confirm-title-box span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4164a6;
+}
+
+.confirm-title-box strong {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+}
+
+.confirm-info-list {
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #ffffff;
+}
+
+.confirm-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 0 18px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.confirm-info-row:last-child {
+  border-bottom: none;
+}
+
+.confirm-info-row span {
+  font-size: 15px;
+  font-weight: 400;
+  color: #555b67;
+}
+
+.confirm-info-row strong {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+  text-align: right;
+}
+
+.confirm-amount {
+  color: #4164a6 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+
+.confirm-button-group {
+  display: flex;
+  gap: 12px;
+}
+
+.confirm-edit-btn {
+  width: 35%;
+  height: 45px;
+  border: 1px solid #bfc3ca;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  cursor: pointer;
+}
+
+.confirm-edit-btn:hover {
+  background: #f9fafb;
+}
+
+.confirm-button-group .transfer-submit-btn {
+  flex: 1;
+}
+
+/* =========================
+   송금 완료 화면: transfer-complete.html
+========================= */
+.complete-message-box {
+  padding: 30px 20px;
+  margin-bottom: 24px;
+  border: 1px solid #dbe6f5;
+  border-radius: 12px;
+  background: #edf4fb;
+  text-align: center;
+}
+
+.complete-icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #4164a6;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.complete-message-box h2 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  color: #111827;
+}
+
+.complete-message-box p {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #5f6673;
+}
+
+.complete-info-list {
+  border: 1px solid #dfe2e7;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  background: #ffffff;
+}
+
+.complete-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 0 18px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.complete-info-row:last-child {
+  border-bottom: none;
+}
+
+.complete-info-row span {
+  font-size: 15px;
+  font-weight: 400;
+  color: #555b67;
+}
+
+.complete-info-row strong {
+  font-size: 16px;
+  font-weight: 500;
+  color: #111827;
+  text-align: right;
+}
+
+.complete-amount {
+  color: #4164a6 !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+
+.complete-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.complete-sub-btn {
+  width: 100%;
+  height: 52px;
+  border: 1px solid #bfc3ca;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  cursor: pointer;
+}
+
+.complete-sub-btn:hover {
+  background: #f9fafb;
+}
+
+.complete-button-group .transfer-submit-btn {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* =========================
+   거래 내역 화면: history.html
+========================= */
+.content-area {
+  flex: 1;
+  padding: 40px 48px;
+  background: #fbfcff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.page-header h1 {
+  font-size: 30px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.page-header p {
+  color: #6b7280;
+  font-size: 15px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 52px;
+  height: 52px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  border-radius: 12px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.history-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.history-summary .summary-card {
+  height: auto;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.history-summary .summary-card p {
+  color: #6b7280;
+  font-size: 15px;
+  margin-bottom: 18px;
+}
+
+.history-summary .summary-card strong {
+  font-size: 30px;
+  color: #111827;
+}
+
+.history-box {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 28px;
+}
+
+.history-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.history-top h2 {
+  font-size: 22px;
+  color: #111827;
+  margin-bottom: 8px;
+}
+
+.history-top p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.filter-area {
+  display: grid;
+  grid-template-columns: 180px 160px 1fr 110px;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.filter-area input,
+.filter-area select {
+  height: 46px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 14px;
+  outline: none;
+  background: #ffffff;
+}
+
+.filter-area input:focus,
+.filter-area select:focus {
+  border-color: #5367aa;
+}
+
+.filter-area button {
+  height: 46px;
+  border: none;
+  border-radius: 10px;
+  background: #5367aa;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.history-table thead {
+  background: #f3f6fb;
+}
+
+.history-table th {
+  padding: 16px;
+  color: #374151;
+  font-weight: 600;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.history-table td {
+  padding: 18px 16px;
+  border-bottom: 1px solid #eef0f4;
+  color: #374151;
+}
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  height: 28px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.type-badge.deposit {
+  background: #e8f5ee;
+  color: #15803d;
+}
+
+.type-badge.withdraw {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.type-badge.transfer {
+  background: #eef2ff;
+  color: #4f46e5;
+}
+
+.plus {
+  color: #15803d !important;
+  font-weight: 700;
+}
+
+.minus {
+  color: #dc2626 !important;
+  font-weight: 700;
+}
+
+.empty-message {
+  display: none;
+  padding: 30px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 15px;
+}
+
+/* =========================
+   에러 표시
+========================= */
+.error-message {
+  min-height: 18px;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #dc2626;
+}
+
+.input-error {
+  border-color: #dc2626 !important;
+  background-color: #fff7f7;
+}
+
+/* =========================
+   작은 화면 대응
+========================= */
+@media (max-width: 900px) {
+  .dashboard-page {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    min-height: auto;
+  }
+
+  .dashboard-content,
+  .content-area {
+    padding: 28px 20px;
+  }
+
+  .summary-grid,
+  .history-summary,
+  .main-grid,
+  .filter-area {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header,
+  .dashboard-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .login-card,
+  .transfer-container,
+  .balance-container {
+    width: calc(100% - 32px);
+  }
+
+  .login-card {
+    min-height: auto;
+    padding: 42px 26px 32px;
+  }
+
+  .bottom-links {
+    flex-wrap: wrap;
+  }
+
+  .confirm-button-group {
+    flex-direction: column;
+  }
+
+  .confirm-edit-btn,
+  .confirm-button-group .transfer-submit-btn {
+    width: 100%;
+  }
+
+  .confirm-info-row,
+  .complete-info-row {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px 18px;
+  }
+
+  .confirm-info-row strong,
+  .complete-info-row strong {
+    text-align: left;
+  }
+
+  .complete-message-box {
+    padding: 26px 18px;
+  }
+}
